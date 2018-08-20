@@ -1,0 +1,13 @@
+<resources>
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
+
+
+    <string name="mage_str_go_and_setting">去设置</string>
+    <string name="mage_str_cancel">取消</string>
+    <string name="mage_str_permission_denied_title">权限被拒绝</string>
+    <string name="mage_str_permission_denied_desc">在设置->应用->%1$s->权限中开启下列权限后重试!</string>
+
+</resources>
