@@ -23,7 +23,9 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
 
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
 
+    compile 'de.hdodenhof:circleimageview:1.1.0'
 
     compile 'com.lzy.net:okgo:2.1.4'
     //RxJava扩展支持，根据需要添加

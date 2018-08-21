@@ -68,7 +68,7 @@ public class MySharedManger {
         return sharedPreferences.getInt(key,-1);
     }
     public String getStringValue(String key){
-        return sharedPreferences.getString(key,null);
+        return sharedPreferences.getString(key,"");
     }
     public boolean getBooleanValue(String key){
         return sharedPreferences.getBoolean(key,false);
