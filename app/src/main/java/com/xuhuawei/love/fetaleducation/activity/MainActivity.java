@@ -84,25 +84,24 @@ public class MainActivity extends BaseActivity {
         }
     };
     private void refreshData() {
-
         String lastAudio=MySharedManger.getInstance().getStringValue(SHARED_KEY_LAST_AUDIO);
-
         arrayList.clear();
-
         File fileList[] = FileUtils.getTencentFile();
-        List<File> fileArray = Arrays.asList(fileList);
-        Collections.sort(fileArray, new FileSortCompare());
+        if (fileList!=null){
+            List<File> fileArray = Arrays.asList(fileList);
+            Collections.sort(fileArray, new FileSortCompare());
 
-        for (File file : fileArray) {
-            MainBean itemBean=new MainBean(file);
-            if (itemBean.title.equals(lastAudio)){
-                itemBean.isSelect=true;
-            }else{
-                itemBean.isSelect=false;
+            for (File file : fileArray) {
+                MainBean itemBean=new MainBean(file);
+                if (itemBean.title.equals(lastAudio)){
+                    itemBean.isSelect=true;
+                }else{
+                    itemBean.isSelect=false;
+                }
+                arrayList.add(itemBean);
             }
-            arrayList.add(itemBean);
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
     }
 
 }
