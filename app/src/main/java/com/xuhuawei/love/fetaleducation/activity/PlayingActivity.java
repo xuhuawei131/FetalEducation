@@ -16,6 +16,7 @@ import com.xuhuawei.love.fetaleducation.bean.PlayingAudioBean;
 import com.xuhuawei.love.fetaleducation.bean.TimerBean;
 import com.xuhuawei.love.fetaleducation.config.SingleCacheData;
 import com.xuhuawei.love.fetaleducation.dialog.MyMenuDialog;
+import com.xuhuawei.love.fetaleducation.dialog.SelectCircleDialog;
 import com.xuhuawei.love.fetaleducation.enums.TimerType;
 import com.xuhuawei.love.fetaleducation.player.MyPlayerService;
 
@@ -47,7 +48,7 @@ public class PlayingActivity extends BaseActivity {
     private TextView text_currentTime;
     private TextView text_totalTime;
 
-//    private FileBean fileBean;
+    //    private FileBean fileBean;
     private String url;
 
     private ImageView ivLast;
@@ -58,6 +59,7 @@ public class PlayingActivity extends BaseActivity {
     private View btn_menu;
     private MyMenuDialog dialog;
     private boolean isDowned = false;
+
     @Override
     protected void init() {
 
@@ -70,19 +72,19 @@ public class PlayingActivity extends BaseActivity {
 
     @Override
     protected void findViewByIds() {
-        ivLast =findViewById(R.id.ivLast);
-        ivPlayOrPause =  findViewById(R.id.ivPlayOrPause);
-        ivNext =  findViewById(R.id.ivNext);
+        ivLast = findViewById(R.id.ivLast);
+        ivPlayOrPause = findViewById(R.id.ivPlayOrPause);
+        ivNext = findViewById(R.id.ivNext);
 
         ivLast.setOnClickListener(onClickListener);
         ivPlayOrPause.setOnClickListener(onClickListener);
         ivNext.setOnClickListener(onClickListener);
 
-        mSeekBar =  findViewById(R.id.musicSeekBar);
+        mSeekBar = findViewById(R.id.musicSeekBar);
         text_title = findViewById(R.id.text_title);
         text_timer = findViewById(R.id.text_timer);
         text_currentTime = findViewById(R.id.text_currentTime);
-        text_totalTime =  findViewById(R.id.text_totalTime);
+        text_totalTime = findViewById(R.id.text_totalTime);
 
         View btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(onClickListener);
@@ -114,12 +116,14 @@ public class PlayingActivity extends BaseActivity {
      */
     private void setData() {
         bean = SingleCacheData.getInstance().getCurrentPlayBean();
-        if (bean!=null){
+        if (bean != null) {
             text_title.setText(bean.itemId);
         }
     }
+
     /**
      * 播放下一个音频
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_START_NEW_MUSIC)
@@ -129,6 +133,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 定时
+     *
      * @param leftTimer
      */
     @Subscriber(tag = ACTION_ALARM_TIMER_UI_UPDATE)
@@ -143,6 +148,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 暂停状态
+     *
      * @param isStart
      */
     @Subscriber(tag = TAG_PLAY_UI_STARTOR_PAUSE)
@@ -203,7 +209,6 @@ public class PlayingActivity extends BaseActivity {
     private void onCompletion(PlayingAudioBean bean) {
         mSeekBar.setMax(bean.totalTime);
         text_totalTime.setText(DateUtils.duration2TimeByMicSecond(bean.totalTime));
-
         resetStatus();
     }
 
@@ -232,7 +237,7 @@ public class PlayingActivity extends BaseActivity {
     }
 
 
-    private void resetStatus(){
+    private void resetStatus() {
         mSeekBar.setProgress(0);
         ivPlayOrPause.setImageResource(R.drawable.ic_play);
         text_currentTime.setText(DateUtils.duration2TimeByMicSecond(0));
@@ -252,7 +257,7 @@ public class PlayingActivity extends BaseActivity {
                     MyPlayerService.startPlayLast();
                     break;
                 case R.id.btn_list:
-                    ToastUtil.showActionResult("暂不支持，后续会支持！",true);
+                    ToastUtil.showActionResult("暂不支持，后续会支持！", true);
 //                    Intent intent = new Intent(PlayingActivity.this, HomePageActivity.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                    startActivity(intent);
@@ -300,9 +305,21 @@ public class PlayingActivity extends BaseActivity {
         public void onDialogItem(int index) {
             if (index == 2) {
                 startActivity(new Intent(PlayingActivity.this, SelectTimerActivity.class));
-            } else {
+            } else if (index==3){
+                SelectCircleDialog dialog = new SelectCircleDialog(PlayingActivity.this);
+                    dialog.setOnDialogItemClick(selectCircleListener);
+                dialog.showDialog();
+            }
+            else {
                 Toast.makeText(PlayingActivity.this, "暂不支持！", Toast.LENGTH_SHORT).show();
             }
+        }
+    };
+
+    private SelectCircleDialog.OnDialogItemClick selectCircleListener=new SelectCircleDialog.OnDialogItemClick() {
+        @Override
+        public void onDialogItem(int index) {
+
         }
     };
 }
