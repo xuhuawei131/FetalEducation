@@ -317,6 +317,9 @@ public class MyPlayerService extends Service {
             } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
 
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+
+
+
                 Intent activityIntent = new Intent();
                 activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activityIntent.setClass(context, MainLockActivity.class);

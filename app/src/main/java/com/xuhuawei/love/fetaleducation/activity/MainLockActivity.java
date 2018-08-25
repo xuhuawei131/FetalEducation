@@ -24,6 +24,7 @@ import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_ER
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_PREPARE;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_STARTOR_PAUSE;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_START_NEW_MUSIC;
+import static me.imid.swipebacklayout.lib.SwipeBackLayout.EDGE_ALL;
 import static me.imid.swipebacklayout.lib.SwipeBackLayout.EDGE_BOTTOM;
 
 public class MainLockActivity extends SwipeBackBaseActivity {
@@ -47,7 +48,8 @@ public class MainLockActivity extends SwipeBackBaseActivity {
     @Override
     protected void findViewByIds() {
         SwipeBackLayout view=getSwipeBackLayout();
-        view.setEdgeTrackingEnabled(EDGE_BOTTOM);
+//        view.setEdgeTrackingEnabled(EDGE_BOTTOM);
+        view.setEdgeTrackingEnabled(EDGE_ALL);
 
         text_title= (TextView) findViewById(R.id.text_title);
         btn_subTitle= (TextView) findViewById(R.id.btn_subTitle);
