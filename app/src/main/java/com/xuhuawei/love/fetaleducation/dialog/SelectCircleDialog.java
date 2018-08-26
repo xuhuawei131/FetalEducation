@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.xhwbaselibrary.persistence.MySharedManger;
 import com.xuhuawei.love.fetaleducation.R;
+
+import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_CIRCLE;
 
 /**
  * Created by lingdian on 17/9/20.
@@ -22,6 +25,9 @@ import com.xuhuawei.love.fetaleducation.R;
  */
 
 public class SelectCircleDialog extends Dialog {
+
+    private ImageView imageViews[]=new ImageView[5];
+
     private View layout_none;
     private ImageView image_none_select;
 
@@ -60,26 +66,39 @@ public class SelectCircleDialog extends Dialog {
         layout_none=  root.findViewById(R.id.layout_none);
         image_none_select=  root.findViewById(R.id.image_none_select);
         layout_none.setOnClickListener(btnlistener);
-
+        imageViews[0]=image_none_select;
 
         layout_single=  root.findViewById(R.id.layout_single);
         image_single_select=  root.findViewById(R.id.image_single_select);
         layout_single.setOnClickListener(btnlistener);
-
-        layout_none_list=  root.findViewById(R.id.layout_list_none);
-        image_list_none_select=  root.findViewById(R.id.image_list_none_select);
-        layout_none_list.setOnClickListener(btnlistener);
-
+        imageViews[1]=image_single_select;
 
         layout_list=  root.findViewById(R.id.layout_list);
         image_list_select=  root.findViewById(R.id.image_list_select);
         layout_list.setOnClickListener(btnlistener);
+        imageViews[2]=image_list_select;
+
+        layout_none_list=  root.findViewById(R.id.layout_list_none);
+        image_list_none_select=  root.findViewById(R.id.image_list_none_select);
+        layout_none_list.setOnClickListener(btnlistener);
+        imageViews[3]=image_list_none_select;
 
 
         layout_random=  root.findViewById(R.id.layout_random);
         image_random_select=  root.findViewById(R.id.image_random_select);
         layout_random.setOnClickListener(btnlistener);
+        imageViews[4]=image_random_select;
 
+
+        int circleType= MySharedManger.getInstance().getIntValue(SHARED_KEY_LAST_CIRCLE);
+        circleType=circleType==-1?0:circleType;
+        for (int i=0;i<5;i++){
+            if (i==circleType){
+                imageViews[i].setImageResource(R.drawable.icon_msg_toggle_true);
+            }else{
+                imageViews[i].setImageResource(R.drawable.icon_msg_toggle_false);
+            }
+        }
 
 
         this.setContentView(root);

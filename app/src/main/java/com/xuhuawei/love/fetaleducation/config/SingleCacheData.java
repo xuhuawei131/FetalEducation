@@ -1,6 +1,8 @@
 package com.xuhuawei.love.fetaleducation.config;
 
 
+import android.text.TextUtils;
+
 import org.simple.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -9,10 +11,12 @@ import java.util.Random;
 
 import com.xhwbaselibrary.base.MyEntry;
 import com.xhwbaselibrary.persistence.MySharedManger;
+import com.xuhuawei.love.fetaleducation.bean.MainBean;
 import com.xuhuawei.love.fetaleducation.bean.PlayingAudioBean;
 import com.xuhuawei.love.fetaleducation.enums.CircleType;
 import com.xuhuawei.love.fetaleducation.enums.TimerType;
 import com.xuhuawei.love.fetaleducation.player.MyPlayerApi;
+import com.xuhuawei.love.fetaleducation.player.MyPlayerService;
 
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_START_NEW_MUSIC;
 import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_AUDIO;
@@ -37,13 +41,14 @@ public class SingleCacheData {
 
     private SingleCacheData() {
         currentTimerType = TimerType.TIMER_CANCEL;
-
         int circleType = MySharedManger.getInstance().getIntValue(SHARED_KEY_LAST_CIRCLE);
         currentCircleType= CircleType.getCircleType(circleType);
-        currentBean=new PlayingAudioBean();
-
-
         currentList = new ArrayList<>();
+
+        String lastAudio = MySharedManger.getInstance().getStringValue(SHARED_KEY_LAST_AUDIO);
+        if (!TextUtils.isEmpty(lastAudio)) {
+            currentBean = new MainBean(lastAudio);
+        }
     }
 
     public static SingleCacheData getInstance() {
@@ -53,6 +58,9 @@ public class SingleCacheData {
         return instance;
     }
 
+    public boolean isPlayingAudio(){
+        return MyPlayerApi.getInstance().isPlaying();
+    }
     /**
      * 获取当前定时的类型
      *
@@ -76,7 +84,6 @@ public class SingleCacheData {
     }
     /**
      * 获取当前播放的数据bean
-     *
      * @return
      */
     public PlayingAudioBean getCurrentPlayBean() {
@@ -119,14 +126,12 @@ public class SingleCacheData {
     public void playNewMusic(PlayingAudioBean bean) {
         if (currentBean != null) {
             //如果播放的 id与当前id 不一样 那么就播放
-            if (!currentBean.itemId.equals(bean.itemId)) {
+            if (!currentBean.itemId.equals(bean.itemId)||!isPlayingAudio()) {
                 //保存更新播放进度
 //                PageInfoImple.getInstance().updatePlayProgress();
-
                 currentBean = bean;
                 //播放下一个新音乐
                 EventBus.getDefault().post(bean, TAG_PLAY_UI_START_NEW_MUSIC);
-
 
                 String url = bean.filePath;
                 //加载数据url

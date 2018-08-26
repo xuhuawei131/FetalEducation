@@ -165,7 +165,7 @@
                 android:id="@+id/ivPlayOrPause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_pause" />
+                android:src="@drawable/ic_play" />
 
             <ImageView
                 android:id="@+id/ivNext"

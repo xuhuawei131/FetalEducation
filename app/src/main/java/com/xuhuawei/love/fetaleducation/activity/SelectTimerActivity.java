@@ -49,7 +49,7 @@ public class SelectTimerActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("选择定时时间");
+        getSupportActionBar().setTitle("");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 //        recyclerView.setEmptyView(R.id.textEmptyView,this);

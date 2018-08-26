@@ -14,10 +14,8 @@ public enum CircleType {
          }else  if (type==2){
              return LIST_CIRCLE;
          }else  if (type==3){
-             return NONE_CIRCLE;
-         }else  if (type==4){
              return LIST_NONE_CIRCLE;
-         }else  if (type==5){
+         }else  if (type==4){
              return RANDOM_CRICLE;
          }else{
              return NONE_CIRCLE;

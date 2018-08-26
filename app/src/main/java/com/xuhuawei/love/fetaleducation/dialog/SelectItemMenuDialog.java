@@ -19,17 +19,17 @@ import com.xuhuawei.love.fetaleducation.R;
  * http://blog.csdn.net/zouzhigang96/article/details/50454111
  */
 
-public class MyMenuDialog extends Dialog {
+public class SelectItemMenuDialog extends Dialog {
     private TextView image_down;
-    public MyMenuDialog(@NonNull Context context) {
+    public SelectItemMenuDialog(@NonNull Context context) {
         super(context, R.style.my_dialog);
     }
 
-    public MyMenuDialog(@NonNull Context context, @StyleRes int themeResId) {
+    public SelectItemMenuDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
     }
 
-    protected MyMenuDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected SelectItemMenuDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         this.setCanceledOnTouchOutside(true);
     }

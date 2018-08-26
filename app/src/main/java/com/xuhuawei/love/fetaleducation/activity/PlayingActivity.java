@@ -1,6 +1,7 @@
 package com.xuhuawei.love.fetaleducation.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -9,15 +10,15 @@ import android.widget.Toast;
 
 import com.xhwbaselibrary.base.BaseActivity;
 
-import com.xhwbaselibrary.base.MyEntry;
 import com.xhwbaselibrary.persistence.MySharedManger;
 import com.xhwbaselibrary.utils.DateUtils;
 import com.xhwbaselibrary.utils.ToastUtil;
 import com.xuhuawei.love.fetaleducation.R;
+import com.xuhuawei.love.fetaleducation.bean.MainBean;
 import com.xuhuawei.love.fetaleducation.bean.PlayingAudioBean;
 import com.xuhuawei.love.fetaleducation.bean.TimerBean;
 import com.xuhuawei.love.fetaleducation.config.SingleCacheData;
-import com.xuhuawei.love.fetaleducation.dialog.MyMenuDialog;
+import com.xuhuawei.love.fetaleducation.dialog.SelectItemMenuDialog;
 import com.xuhuawei.love.fetaleducation.dialog.SelectCircleDialog;
 import com.xuhuawei.love.fetaleducation.enums.CircleType;
 import com.xuhuawei.love.fetaleducation.enums.TimerType;
@@ -25,8 +26,6 @@ import com.xuhuawei.love.fetaleducation.player.MyPlayerService;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
-
-import java.io.File;
 
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.ACTION_ALARM_TIMER_UI_UPDATE;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.ACTION_VIEWHOLDER_TIMER;
@@ -40,7 +39,7 @@ import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_PR
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_SEEK_COMPLETION;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_STARTOR_PAUSE;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_START_NEW_MUSIC;
-import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_CIRCLE;
+import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_AUDIO;
 
 public class PlayingActivity extends BaseActivity {
 
@@ -61,7 +60,7 @@ public class PlayingActivity extends BaseActivity {
     private TextView text_timer;
     private View btn_list;
     private View btn_menu;
-    private MyMenuDialog dialog;
+    private SelectItemMenuDialog dialog;
     private boolean isDowned = false;
 
     @Override
@@ -107,22 +106,20 @@ public class PlayingActivity extends BaseActivity {
     @Override
     protected void requestService() {
         EventBus.getDefault().register(this);
-        setData();
+        boolean isPlaying = SingleCacheData.getInstance().isPlayingAudio();
+        if (!isPlaying) {
+            ivPlayOrPause.setImageResource(R.drawable.ic_play);
+        } else {
+            ivPlayOrPause.setImageResource(R.drawable.ic_pause);
+        }
+        bean = SingleCacheData.getInstance().getCurrentPlayBean();
+        text_totalTime.setText(DateUtils.duration2TimeByMicSecond(bean.totalTime));
+        text_title.setText(bean.itemId);
     }
 
     @Override
     protected void onMyDestory() {
         EventBus.getDefault().unregister(this);
-    }
-
-    /**
-     * 更新信息
-     */
-    private void setData() {
-        bean = SingleCacheData.getInstance().getCurrentPlayBean();
-        if (bean != null) {
-            text_title.setText(bean.itemId);
-        }
     }
 
     /**
@@ -132,7 +129,7 @@ public class PlayingActivity extends BaseActivity {
      */
     @Subscriber(tag = TAG_PLAY_UI_START_NEW_MUSIC)
     private void onPlayNewMusic(PlayingAudioBean bean) {
-        setData();
+        text_title.setText(bean.itemId);
     }
 
     /**
@@ -166,16 +163,19 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 更新进度
+     *
      * @param currentPosition
      */
     @Subscriber(tag = TAG_PLAY_UI_PROGRESS)
     private void onUpdateProgress(int currentPosition) {
+        mSeekBar.setMax(bean.totalTime);
         mSeekBar.setProgress(currentPosition);
         text_currentTime.setText(DateUtils.duration2TimeByMicSecond(currentPosition));
     }
 
     /**
      * 播放错误
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_ERROR)
@@ -187,6 +187,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 开始缓存
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_BUFFER)
@@ -197,6 +198,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 拖动完成
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_SEEK_COMPLETION)
@@ -207,6 +209,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 播放完成
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_COMPLETION)
@@ -218,6 +221,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 播放准备好了
+     *
      * @param bean
      */
     @Subscriber(tag = TAG_PLAY_UI_PREPARE)
@@ -229,6 +233,7 @@ public class PlayingActivity extends BaseActivity {
 
     /**
      * 选择定时器了
+     *
      * @param bean
      */
     @Subscriber(tag = ACTION_VIEWHOLDER_TIMER)
@@ -252,7 +257,17 @@ public class PlayingActivity extends BaseActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.ivPlayOrPause:
-                    EventBus.getDefault().post("", TAG_PLAY_SERVICE_PAUSE_OR_START);
+                    if (MyPlayerService.isRunningPlayingService()) {
+                        EventBus.getDefault().post("", TAG_PLAY_SERVICE_PAUSE_OR_START);
+                    } else {
+                        String lastAudio = MySharedManger.getInstance().getStringValue(SHARED_KEY_LAST_AUDIO);
+                        if (!TextUtils.isEmpty(lastAudio)) {
+                            MainBean bean = new MainBean(lastAudio);
+                            //播放制定的音频
+                            MyPlayerService.startPlay(bean);
+                            EventBus.getDefault().post(false, TAG_PLAY_UI_STARTOR_PAUSE);
+                        }
+                    }
                     break;
                 case R.id.ivNext:
                     MyPlayerService.startPlayNext();
@@ -269,7 +284,7 @@ public class PlayingActivity extends BaseActivity {
                     break;
                 case R.id.btn_menu:
                     if (dialog == null) {
-                        dialog = new MyMenuDialog(PlayingActivity.this);
+                        dialog = new SelectItemMenuDialog(PlayingActivity.this);
                         dialog.setOnDialogItemClick(dialogItemClick);
                     }
                     dialog.showDialog(isDowned);
@@ -304,26 +319,24 @@ public class PlayingActivity extends BaseActivity {
         }
     };
 
-    private MyMenuDialog.OnDialogItemClick dialogItemClick = new MyMenuDialog.OnDialogItemClick() {
+    private SelectItemMenuDialog.OnDialogItemClick dialogItemClick = new SelectItemMenuDialog.OnDialogItemClick() {
         @Override
         public void onDialogItem(int index) {
             if (index == 2) {
                 startActivity(new Intent(PlayingActivity.this, SelectTimerActivity.class));
-            } else if (index==3){
+            } else if (index == 3) {
                 SelectCircleDialog dialog = new SelectCircleDialog(PlayingActivity.this);
-                    dialog.setOnDialogItemClick(selectCircleListener);
+                dialog.setOnDialogItemClick(selectCircleListener);
                 dialog.showDialog();
-            }
-            else {
+            } else {
                 Toast.makeText(PlayingActivity.this, "暂不支持！", Toast.LENGTH_SHORT).show();
             }
         }
     };
 
-    private SelectCircleDialog.OnDialogItemClick selectCircleListener=new SelectCircleDialog.OnDialogItemClick() {
+    private SelectCircleDialog.OnDialogItemClick selectCircleListener = new SelectCircleDialog.OnDialogItemClick() {
         @Override
         public void onDialogItem(int index) {
-
             SingleCacheData.getInstance().setCurrentCircleType(CircleType.getCircleType(index));
         }
     };

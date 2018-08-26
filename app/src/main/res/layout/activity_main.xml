@@ -84,7 +84,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
                                     android:layout_toLeftOf="@+id/ivNext"
-                                    android:src="@drawable/ic_pause" />
+                                    android:src="@drawable/ic_play" />
 
                                 <ImageView
                                     android:id="@+id/ivNext"

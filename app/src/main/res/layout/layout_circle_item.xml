@@ -5,14 +5,14 @@
     android:background="@color/black"
     android:gravity="center"
     android:orientation="vertical">
-
+    <!--none-->
     <LinearLayout
         android:id="@+id/layout_none"
-        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/btn_none"
@@ -32,19 +32,18 @@
             android:src="@drawable/icon_msg_toggle_false" />
     </LinearLayout>
 
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/white" />
-
+    <!--single-->
     <LinearLayout
         android:id="@+id/layout_single"
-        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/btn_single_circle"
@@ -68,47 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/white" />
-
-    <LinearLayout
-        android:id="@+id/layout_list_none"
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/btn_list_none_circle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:minHeight="42dp"
-            android:text="列表播放"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/image_list_none_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_msg_toggle_false" />
-    </LinearLayout>
-
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/white" />
-
+    <!--list circle-->
     <LinearLayout
         android:id="@+id/layout_list"
-        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/btn_list_circle"
@@ -132,15 +98,45 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/white" />
-
-
+    <!--list none-->
     <LinearLayout
-        android:id="@+id/layout_random"
-        android:padding="15dp"
+        android:id="@+id/layout_list_none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/btn_list_none_circle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:minHeight="42dp"
+            android:text="列表播放"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_list_none_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_msg_toggle_false" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white" />
+    <!--random-->
+    <LinearLayout
+        android:id="@+id/layout_random"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/btn_random_circle"
@@ -174,6 +170,4 @@
         android:text="关闭"
         android:textColor="@color/white"
         android:textSize="18sp" />
-
-
 </LinearLayout>

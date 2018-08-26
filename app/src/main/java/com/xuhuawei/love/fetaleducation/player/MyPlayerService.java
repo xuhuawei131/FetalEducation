@@ -123,7 +123,6 @@ public class MyPlayerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
             String action = intent.getAction();
-
             if (!TextUtils.isEmpty(action)) {
                 //播放音频
                 if (SERVICE_ACTION_PLAYER.equals(action)) {
@@ -319,6 +318,7 @@ public class MyPlayerService extends Service {
 //            currentBean.isPlaying = true;
 
             bean.totalTime = during;
+
             bean.isPlaying = true;
             MyPlayerApi.getInstance().seekTo(bean.currentTime);
             MyPlayerApi.getInstance().startPlay();
