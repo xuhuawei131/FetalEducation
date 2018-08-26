@@ -16,8 +16,14 @@ public class FileUtils {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
         return externalStorageDirectory;
     }
+    public static File getTencentFile() {
+        File tencentFile = new File(getFileDir(), "tencent/qqfile_recv/");
+        return tencentFile;
+    }
 
-    public static File[] getTencentFile() {
+
+
+    public static File[] getTencentFileList() {
         File tencentFile = new File(getFileDir(), "tencent/qqfile_recv/");
         SongNameFilter filter = new SongNameFilter();
 

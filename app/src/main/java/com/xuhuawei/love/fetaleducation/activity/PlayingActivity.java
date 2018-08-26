@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.xhwbaselibrary.base.BaseActivity;
 
+import com.xhwbaselibrary.base.MyEntry;
+import com.xhwbaselibrary.persistence.MySharedManger;
 import com.xhwbaselibrary.utils.DateUtils;
 import com.xhwbaselibrary.utils.ToastUtil;
 import com.xuhuawei.love.fetaleducation.R;
@@ -17,6 +19,7 @@ import com.xuhuawei.love.fetaleducation.bean.TimerBean;
 import com.xuhuawei.love.fetaleducation.config.SingleCacheData;
 import com.xuhuawei.love.fetaleducation.dialog.MyMenuDialog;
 import com.xuhuawei.love.fetaleducation.dialog.SelectCircleDialog;
+import com.xuhuawei.love.fetaleducation.enums.CircleType;
 import com.xuhuawei.love.fetaleducation.enums.TimerType;
 import com.xuhuawei.love.fetaleducation.player.MyPlayerService;
 
@@ -37,6 +40,7 @@ import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_PR
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_SEEK_COMPLETION;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_STARTOR_PAUSE;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_START_NEW_MUSIC;
+import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_CIRCLE;
 
 public class PlayingActivity extends BaseActivity {
 
@@ -320,6 +324,7 @@ public class PlayingActivity extends BaseActivity {
         @Override
         public void onDialogItem(int index) {
 
+            SingleCacheData.getInstance().setCurrentCircleType(CircleType.getCircleType(index));
         }
     };
 }

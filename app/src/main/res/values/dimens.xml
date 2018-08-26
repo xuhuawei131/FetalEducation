@@ -1,0 +1,77 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="tsize6">6sp</dimen>
+    <dimen name="tsize8">8sp</dimen>
+    <dimen name="tsize10">10sp</dimen>
+    <dimen name="tsize12">12sp</dimen>
+    <dimen name="tsize13">13sp</dimen>
+    <dimen name="tsize14">14sp</dimen>
+    <dimen name="tsize15">15sp</dimen>
+    <dimen name="tsize16">16sp</dimen>
+    <dimen name="tsize17">17sp</dimen>
+    <dimen name="tsize18">18sp</dimen>
+    <dimen name="tsize19">19sp</dimen>
+    <dimen name="tsize20">20sp</dimen>
+    <dimen name="tsize21">21sp</dimen>
+    <dimen name="tsize22">22sp</dimen>
+    <dimen name="tsize23">23sp</dimen>
+    <dimen name="tsize24">24sp</dimen>
+    <dimen name="tsize26">26sp</dimen>
+    <dimen name="tsize32">32sp</dimen>
+    <dimen name="tsize48">48sp</dimen>
+    <dimen name="tsize56">56sp</dimen>
+    <dimen name="titlebar_hight">48dp</dimen>
+    <dimen name="bottom_hight">53dp</dimen>
+    <dimen name="refresh_bar_with">4dp</dimen>
+    <dimen name="refresh_bar_separator_length">4dp</dimen>
+    <dimen name="service_icon_margin_right">3dip</dimen>
+    <dimen name="indicator_hight">3dp</dimen>
+    <dimen name="tab_split_hight">19dp</dimen>
+    <dimen name="tab_hight">41dp</dimen>
+    <dimen name="signinwall_wh">70dip</dimen>
+    <dimen name="memberplan_wh">112dip</dimen>
+
+    <integer name="sacle_time">200</integer>
+
+    <dimen name="props_margin">8dip</dimen>
+    <dimen name="expression_width">35dip</dimen>
+    <dimen name="expression_width_border">39dip</dimen>
+    <dimen name="right_height_width">23dip</dimen>
+    <dimen name="adapter_name">16sp</dimen>
+    <dimen name="hotgroup_item_padding">5dp</dimen>
+    <dimen name="hotgroup_card_margin">5dp</dimen>
+
+    <integer name="groupdetail_member_columns">5</integer>
+
+    <dimen name="groupdetail_member_spacing">10dp</dimen>
+    <dimen name="groupdetail_member_padding">20dp</dimen>
+
+    <dimen name="dp_066">0.66dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_36">36dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
+
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+
+    <dimen name="avatar_margin">8dp</dimen>
+
+    <!--50-->
+    <dimen name="fate_circle_nickname_max_width">80dp</dimen>
+    <!--50-->
+    <dimen name="edit_input_height">45dp</dimen>
+    <dimen name="banner_height">46dp</dimen>
+    <dimen name="banner_margin">0dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

@@ -8,6 +8,11 @@ public class MyEntry<V> {
     private String key;
     private V value;
 
+    public MyEntry(String key,V value){
+        this.key=key;
+        this.value=value;
+    }
+
     public void put(String key,V value){
         this.key=key;
         this.value=value;

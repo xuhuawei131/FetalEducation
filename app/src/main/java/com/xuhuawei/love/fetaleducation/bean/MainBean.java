@@ -18,5 +18,11 @@ public class MainBean extends PlayingAudioBean implements Serializable {
         itemId=title;
         filePath=file.getAbsolutePath();
     }
-
+    public MainBean(String title) {
+        this.title = title;
+        this.file =new File(FileUtils.getTencentFile(),title) ;
+        this.updateTime = FileUtils.formateDate(file.lastModified());
+        itemId=title;
+        filePath=file.getAbsolutePath();
+    }
 }

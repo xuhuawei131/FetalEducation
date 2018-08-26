@@ -31,6 +31,10 @@ public class SelectCircleDialog extends Dialog {
     private View layout_list;
     private ImageView image_list_select;
 
+    private View layout_none_list;
+    private ImageView image_list_none_select;
+
+
     private View layout_random;
     private ImageView image_random_select;
 
@@ -61,6 +65,10 @@ public class SelectCircleDialog extends Dialog {
         layout_single=  root.findViewById(R.id.layout_single);
         image_single_select=  root.findViewById(R.id.image_single_select);
         layout_single.setOnClickListener(btnlistener);
+
+        layout_none_list=  root.findViewById(R.id.layout_list_none);
+        image_list_none_select=  root.findViewById(R.id.image_list_none_select);
+        layout_none_list.setOnClickListener(btnlistener);
 
 
         layout_list=  root.findViewById(R.id.layout_list);
@@ -106,8 +114,10 @@ public class SelectCircleDialog extends Dialog {
                 onDialogItemClick.onDialogItem(1);
             } else if (v.getId() == R.id.layout_list) {
                 onDialogItemClick.onDialogItem(2);
-            } else if (v.getId() == R.id.layout_random) {
+            } else if (v.getId() == R.id.layout_list_none) {
                 onDialogItemClick.onDialogItem(3);
+            }else if (v.getId() == R.id.layout_random) {
+                onDialogItemClick.onDialogItem(4);
             }
         }
     };

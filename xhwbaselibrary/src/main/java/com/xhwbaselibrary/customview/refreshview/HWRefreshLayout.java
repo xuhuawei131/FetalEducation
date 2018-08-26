@@ -11,7 +11,7 @@ import com.xhwbaselibrary.customview.refreshview.drawables.HWRefreshDrawable4;
  */
 public class HWRefreshLayout extends PullToRefreshView {
 
-    private HWRefreshDrawable4 drawable4 ;
+    private HWRefreshDrawable4 drawable4;
 
     public HWRefreshLayout(Context context) {
         super(context);
@@ -25,15 +25,23 @@ public class HWRefreshLayout extends PullToRefreshView {
         setRefreshStyle(drawable4);
     }
 
-    public void setPaintColor(int color){
-        if(drawable4 != null){
+    /**
+     * 设置自动刷新
+     */
+    public void setAutoRefreshView() {
+        setRefreshing(true);
+        notifiyRefreshListener();
+    }
+
+    public void setPaintColor(int color) {
+        if (drawable4 != null) {
             drawable4.setPaintColor(color);
         }
     }
 
 
-    public void setRefreshBackground(int color){
-        if(drawable4 != null){
+    public void setRefreshBackground(int color) {
+        if (drawable4 != null) {
             drawable4.setRefreshBackground(color);
         }
     }

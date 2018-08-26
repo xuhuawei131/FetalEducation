@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">@color/white</item>
+        <!-- color of the menu overflow icon -->
+        <item name="android:textColorSecondary">@color/white</item>
+
     </style>
 
     <style name="neteasa_music_time_text_sytle">
@@ -36,10 +41,27 @@
         <item name="android:textSize">15sp</item>
 
     </style>
-
+<!---->
     <style name="dialogstyle" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
 
+    <!--导航栏布局-->
+    <style name="navi_left_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/black_333333</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="navi_left_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/black_787878</item>
+    </style>
 </resources>

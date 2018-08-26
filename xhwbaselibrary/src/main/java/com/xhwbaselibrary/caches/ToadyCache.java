@@ -35,8 +35,7 @@ public class ToadyCache {
         if (isSameDay){
             return true;
         }else{
-            MyEntry<Long> entry=new MyEntry<>();
-            entry.put("4gTime",currentTime);
+            MyEntry<Long> entry=new MyEntry<Long>("4gTime",currentTime);
             MySharedManger.getInstance().putKeyAndValue(entry);
             return false;
         }

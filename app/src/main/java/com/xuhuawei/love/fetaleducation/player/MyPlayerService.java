@@ -1,6 +1,7 @@
 package com.xuhuawei.love.fetaleducation.player;
 
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -14,6 +15,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+
+import com.xhwbaselibrary.MyBaseApp;
 import com.xhwbaselibrary.caches.MyAppContext;
 
 import org.simple.eventbus.EventBus;
@@ -24,6 +27,9 @@ import com.xuhuawei.love.fetaleducation.bean.PlayingAudioBean;
 import com.xuhuawei.love.fetaleducation.config.SingleCacheData;
 import com.xuhuawei.love.fetaleducation.enums.TimerType;
 
+import java.util.ArrayList;
+
+import static com.xhwbaselibrary.MyBaseApp.context;
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.*;
 
 /**
@@ -32,6 +38,18 @@ import static com.xuhuawei.love.fetaleducation.config.EventBusTag.*;
 public class MyPlayerService extends Service {
     public static final int MUSIC_MESSAGE = 0;
     private int totalSeconds = 0;
+
+
+    public static boolean isRunningPlayingService() {
+        ActivityManager myManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) myManager.getRunningServices(Integer.MAX_VALUE);
+        for (int i = 0; i < runningService.size(); i++) {
+            if (runningService.get(i).service.getClassName().toString().equals(MyPlayerService.class.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * 设置定时器
@@ -64,7 +82,9 @@ public class MyPlayerService extends Service {
      */
     public static void startPlayNext() {
         PlayingAudioBean bean = SingleCacheData.getInstance().getNextMusic();
-        startPlay(bean);
+        if (bean != null) {
+            startPlay(bean);
+        }
     }
 
     /**
@@ -147,9 +167,9 @@ public class MyPlayerService extends Service {
      * 播放  * @param bean
      */
     public void playItem(PlayingAudioBean bean) {
+        EventBus.getDefault().post(bean, TAG_PLAY_UI_START_NEW_AUDIO);
         SingleCacheData.getInstance().playNewMusic(bean);
     }
-
 
 
     @Override
@@ -236,7 +256,7 @@ public class MyPlayerService extends Service {
             int currentPosition = MyPlayerApi.getInstance().getCurrentPosition();
 
             boolean isPlaying = MyPlayerApi.getInstance().isPlaying();
-            if (isPlaying){
+            if (isPlaying) {
                 startUpdateSeekBarProgress();
                 EventBus.getDefault().post(currentPosition, TAG_PLAY_UI_PROGRESS);
             }
@@ -317,9 +337,6 @@ public class MyPlayerService extends Service {
             } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
 
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
-
-
-
                 Intent activityIntent = new Intent();
                 activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activityIntent.setClass(context, MainLockActivity.class);

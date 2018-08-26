@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_blackground"
     android:orientation="vertical"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
 
     <!--顶部-->
     <LinearLayout
@@ -40,16 +39,17 @@
                 android:ellipsize="end"
                 android:focusable="true"
                 android:gravity="center"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/text_subTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="金凤胎教课程"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                android:text="金凤胎教课程" />
+                android:textSize="15sp" />
         </LinearLayout>
         <!--分享-->
         <ImageView

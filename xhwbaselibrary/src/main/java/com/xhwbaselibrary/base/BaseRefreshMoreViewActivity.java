@@ -94,10 +94,9 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
             refresh_layout.post(new Runnable() {
                 @Override
                 public void run() {
-                    refresh_layout.setRefreshing(true);
+                    refresh_layout.setAutoRefreshView();
                 }
             });
-
         }
     }
 
@@ -109,6 +108,7 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
             refresh_layout.setRefreshing(false);
         }
     }
+
 
 
     private PullToRefreshView.OnRefreshListener onRefreshListener=new PullToRefreshView.OnRefreshListener(){

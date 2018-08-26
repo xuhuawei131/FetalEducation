@@ -3,6 +3,7 @@ package com.xuhuawei.love.fetaleducation.adapter;
 import android.view.View;
 
 import com.xhwbaselibrary.adapters.MyListBaseAdapter;
+import com.xhwbaselibrary.adapters.MyRecyclerBaseAdapter;
 import com.xhwbaselibrary.interfaces.LifeCircleContext;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.adapter.viewholder.MainViewHolder;
 import com.xuhuawei.love.fetaleducation.bean.MainBean;
 
-public class MainAdapter extends MyListBaseAdapter<MainViewHolder,MainBean> {
+public class MainAdapter extends MyRecyclerBaseAdapter<MainViewHolder,MainBean> {
 
     public MainAdapter(LifeCircleContext context, List<MainBean> arrayList) {
         super(context, arrayList);
@@ -24,4 +25,6 @@ public class MainAdapter extends MyListBaseAdapter<MainViewHolder,MainBean> {
     public MainViewHolder getViewHolder(View view) {
         return new MainViewHolder(this,view);
     }
+
+
 }

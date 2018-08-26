@@ -64,7 +64,7 @@ public class MySharedManger {
     public long getLongValue(String key){
         return sharedPreferences.getLong(key,-1);
     }
-    public long getIntValue(String key){
+    public int getIntValue(String key){
         return sharedPreferences.getInt(key,-1);
     }
     public String getStringValue(String key){

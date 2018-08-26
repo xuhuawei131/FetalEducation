@@ -452,6 +452,12 @@ public class PullToRefreshView extends ViewGroup {
         mRefreshView.layout(left, top, left + width - right, top + height - bottom);
     }
 
+    protected void notifiyRefreshListener(){
+        if (mListener!=null){
+            mListener.onRefresh();
+        }
+    }
+
     public void setOnRefreshListener(OnRefreshListener listener) {
         mListener = listener;
     }

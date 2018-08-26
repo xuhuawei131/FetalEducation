@@ -25,9 +25,9 @@ public class EventBusTag {
 
 
 
-
-
     public static final String TAG_PLAY_UI_STARTOR_PAUSE="play_ui_start_pause";
+    /**播放音新的频**/
+    public static final String TAG_PLAY_UI_START_NEW_AUDIO="play_ui_new_audio";
     /**播放进度**/
     public static final String TAG_PLAY_UI_PROGRESS ="play_progress";
     /**播放准备好了**/
@@ -59,9 +59,6 @@ public class EventBusTag {
     public static final String SERVICE_ACTION_PLAYER="action_service_player";
 
     //----------------------退出的广播-------------------------
-
-
-
 
     public static final String ACTION_EXIT_ALL_LIFE="exit_all_life";
 

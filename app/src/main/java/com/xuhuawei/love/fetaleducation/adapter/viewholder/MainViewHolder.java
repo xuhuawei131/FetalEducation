@@ -9,6 +9,10 @@ import com.xhwbaselibrary.interfaces.AdapterBehavior;
 import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.bean.MainBean;
 
+import org.simple.eventbus.EventBus;
+
+import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_HOME_ITEM_CLICK;
+
 public class MainViewHolder extends BaseViewHolder<MainBean> {
 
     private View view_selected;
@@ -35,6 +39,12 @@ public class MainViewHolder extends BaseViewHolder<MainBean> {
         }
         text_time.setText(bean.updateTime);
         text_name.setText(bean.title);
-
+        itemView.setOnClickListener(onClickListener);
     }
+    private View.OnClickListener onClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            EventBus.getDefault().post(position,TAG_HOME_ITEM_CLICK);
+        }
+    };
 }
