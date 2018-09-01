@@ -24,6 +24,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by RavenWang on 16/4/14.
+ * 小鸟下拉飞翔
  */
 public class HWRefreshDrawable2 extends BaseRefreshView implements Animatable {
 

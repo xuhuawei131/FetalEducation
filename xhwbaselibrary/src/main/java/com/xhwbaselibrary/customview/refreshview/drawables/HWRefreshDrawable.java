@@ -76,6 +76,7 @@ public class HWRefreshDrawable extends BaseRefreshView implements Animatable {
 
         mMatrix = new Matrix();
         mTop = -mParent.getTotalDragDistance();
+
         paint = new Paint();
         paint.setColor(Color.GRAY);
         textSize = dpToPixel(getContext(),16);

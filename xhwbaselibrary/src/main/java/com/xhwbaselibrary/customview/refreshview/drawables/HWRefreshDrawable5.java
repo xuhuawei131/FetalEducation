@@ -18,7 +18,7 @@ import com.xhwbaselibrary.customview.refreshview.PullToRefreshView;
 /**
  * Created by RavenWang on 16/4/14.
  */
-public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
+public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
 
     public static final String TAG = "REF";
 
@@ -59,9 +59,6 @@ public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
 
     private boolean useFrame1 = false;
 
-
-//    private Subscription subscription ;
-
     private boolean isAnimating = false ;
 
     private Paint paint ;
@@ -74,14 +71,13 @@ public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
 
 
 
-    public HWRefreshDrawable4(Context context, final PullToRefreshView layout) {
+    public HWRefreshDrawable5(Context context, final PullToRefreshView layout) {
         super(context, layout);
         mParent = layout ;
         mMatrix = new Matrix();
         bitmapSize = dpToPixel(getContext(),60);
         maxDragDistance = dpToPixel(getContext(),80);
         arrowMarginTop = (maxDragDistance - bitmapSize)/2;
-
 
         textSize = dpToPixel(getContext(),14);
         paint = new Paint();
@@ -113,24 +109,12 @@ public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
 
 
     private void initParams(int viewWidth){
-
         if(viewWidth <= 0){
             return ;
         }
 
-
         mTop = -mParent.getTotalDragDistance();
         arrowMarginLeft = (viewWidth - bitmapSize - textSize*4)/2 - bitmapSize/3;
-
-
-//        Log.i(TAG,"-------------------------");
-//        Log.i(TAG,"textSize = "+textSize);
-//        Log.i(TAG,"bitmapHeight = "+bitmapHeight);
-//        Log.i(TAG,"bitmapWidth = "+bitmapWidth);
-//        Log.i(TAG,"arrowMarginTop = "+arrowMarginTop);
-//        Log.i(TAG,"textX = "+textX);
-//        Log.i(TAG,"textY = "+textY);
-//        Log.i(TAG,"-------------------------");
 
     }
 
@@ -141,13 +125,10 @@ public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
             frame1 = Bitmap.createScaledBitmap(frame1, bitmapSize, bitmapSize, true);
         }
 
-
         if(frame2 == null){
             frame2 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.jyloading2);
             frame2 = Bitmap.createScaledBitmap(frame2, bitmapSize, bitmapSize, true);
         }
-
-
 
     }
 
@@ -253,12 +234,7 @@ public class HWRefreshDrawable4 extends BaseRefreshView implements Animatable {
 
         float scale = (1 - origenalScale)*dragPercent+origenalScale;
         float scaleSize = bitmapSize*scale ;
-        matrix.setScale(scale,scale,bitmapSize/2,scaleSize/2);
-
-//        if(isRefreshing){
-//            matrix.setScale(1.0f,1.0f);
-//        }
-
+//        matrix.setScale(scale,scale,bitmapSize/2,scaleSize/2);
 
 
         matrix.postTranslate(arrowMarginLeft, (maxDragDistance - scaleSize) / 2);
