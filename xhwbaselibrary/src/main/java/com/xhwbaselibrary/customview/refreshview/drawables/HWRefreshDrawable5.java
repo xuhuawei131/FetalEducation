@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.Animatable;
 import android.util.Log;
 
-import com.xhwbaselibrary.R;
 import com.xhwbaselibrary.customview.refreshview.BaseRefreshView;
 import com.xhwbaselibrary.customview.refreshview.PullToRefreshView;
 
@@ -25,8 +24,9 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
     private int mTop;
     private PullToRefreshView mParent;
     private Matrix mMatrix;
-    private static Bitmap frame1 ;
-    private static Bitmap frame2 ;
+
+    private Bitmap frame[]=new Bitmap[17];
+    private static final int TOTAL_SUM= 100;
     private float mPercent = 0.0f;
     /**
      * 最大下拉距离
@@ -50,7 +50,14 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
     /**
      * 图片距左侧的距离，单位Px
      */
-    private float arrowMarginLeft  ;
+    private float arrowImageMarginLeft;
+
+
+    /**
+     * 图片距左侧的距离，单位Px
+     */
+    private float arrowTextMarginLeft;
+
 
     /**
      * 时间控制器，用于控制两帧之间的刷新间隔
@@ -66,8 +73,9 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
     private String content = "下拉刷新";
 
     private Thread drawThread = null ;
-    private long interval = 100 ;
+    private long interval = 1000 ;
     private int background = Color.parseColor("#F0F0F0");
+    private int frameIndex=0;
 
 
 
@@ -75,7 +83,7 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         super(context, layout);
         mParent = layout ;
         mMatrix = new Matrix();
-        bitmapSize = dpToPixel(getContext(),60);
+        bitmapSize = dpToPixel(getContext(),20);
         maxDragDistance = dpToPixel(getContext(),80);
         arrowMarginTop = (maxDragDistance - bitmapSize)/2;
 
@@ -84,10 +92,8 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         paint.setColor(Color.GRAY);
         paint.setTextSize(textSize);
         paint.setAntiAlias(true);
+
         initBitmap();
-
-
-
         layout.post(new Runnable() {
             @Override
             public void run() {
@@ -114,39 +120,31 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         }
 
         mTop = -mParent.getTotalDragDistance();
-        arrowMarginLeft = (viewWidth - bitmapSize - textSize*4)/2 - bitmapSize/3;
+        arrowImageMarginLeft = (viewWidth - bitmapSize)/2;
 
     }
 
 
     private void initBitmap(){
-        if(frame1 == null){
-            frame1 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.jyloading1);
-            frame1 = Bitmap.createScaledBitmap(frame1, bitmapSize, bitmapSize, true);
+        for (int i = 0; i <frame.length ; i++) {
+            int resId =getContext().getResources().getIdentifier("a"+(i+1), "drawable", getContext().getPackageName());
+            Bitmap frame1 = BitmapFactory.decodeResource(getContext().getResources(), resId);
+            frame[i]= Bitmap.createScaledBitmap(frame1, bitmapSize, bitmapSize, true);
         }
-
-        if(frame2 == null){
-            frame2 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.jyloading2);
-            frame2 = Bitmap.createScaledBitmap(frame2, bitmapSize, bitmapSize, true);
-        }
-
     }
 
     @Override
     public void setPercent(float percent, boolean invalidate) {
-//        Log.i(TAG,"setPercent()---> percent = "+percent+" , invalidate = "+invalidate);
+//        Log.i("xhw","setPercent()---> percent = "+percent+" , invalidate = "+invalidate);
         mPercent = percent;
     }
 
     @Override
     public void offsetTopAndBottom(int offset) {
-//        Log.i(TAG,"offsetTopAndBottom()---> offset = "+offset);
         mTop += offset;
         if(!isAnimating){
             startAnimation();
         }
-
-//
     }
 
     @Override
@@ -165,30 +163,11 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         timestamp = 0 ;
         content = "下拉刷新";
         stopDraw();
-
-
-
     }
 
 
     private synchronized void stopDraw(){
-
         isAnimating = false ;
-
-//        if(subscription != null && !subscription.isUnsubscribed()){
-//            subscription.unsubscribe();
-//            subscription = null ;
-//        }
-//        Observable.just("xx")
-//                .subscribeOn(Schedulers.io())
-//                .delay(100,TimeUnit.MILLISECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<String>() {
-//                    @Override
-//                    public void call(String s) {
-//                        isAnimating = false;
-//                    }
-//                });
     }
 
 
@@ -203,15 +182,11 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         final int saveCount = canvas.save();
         canvas.translate(0, mTop);
         drawLogo(canvas);
-
         canvas.restoreToCount(saveCount);
     }
 
 
     private void drawLogo(Canvas canvas) {
-
-
-
         Matrix matrix = mMatrix;
         matrix.reset();
 
@@ -223,74 +198,44 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         }
 
         if(dragPercent <= 1.0){
-
             if(isRefreshing){
                 content = "正在刷新";
             }else{
                 content = "下拉刷新";
             }
-
         }
 
         float scale = (1 - origenalScale)*dragPercent+origenalScale;
         float scaleSize = bitmapSize*scale ;
-//        matrix.setScale(scale,scale,bitmapSize/2,scaleSize/2);
+//        matrix.postTranslate(arrowImageMarginLeft, (maxDragDistance - scaleSize) / 2);
+        matrix.postTranslate(arrowImageMarginLeft, maxDragDistance/2+textSize/2-bitmapSize*2);
 
-
-        matrix.postTranslate(arrowMarginLeft, (maxDragDistance - scaleSize) / 2);
-
-//        canvas.drawRGB(240, 240, 240);
         canvas.drawColor(background);
         if(isRefreshing){
             canvas.drawBitmap(getFrame(), matrix,null);
         }else{
             if(dragPercent >= 1.0){
                 content = "松开刷新";
-                canvas.drawBitmap(getFrame(), matrix,null);
+//                canvas.drawBitmap(getFrame(), matrix,null);
             }else{
-                canvas.drawBitmap(frame1, matrix,null);
+//                canvas.drawBitmap(frame1, matrix,null);
             }
-
+            canvas.drawBitmap(getFrame(), matrix,null);
         }
-
-        canvas.drawText(content,arrowMarginLeft+bitmapSize+textSize/2,maxDragDistance/2+textSize/2,paint);
-
+        arrowTextMarginLeft=(mParent.getWidth() - paint.measureText(content))/2;
+        canvas.drawText(content, arrowTextMarginLeft,maxDragDistance/2+textSize/2,paint);
     }
 
     private Bitmap getFrame(){
-        long time = System.currentTimeMillis();
-        if(timestamp == 0){
-            timestamp = time ;
-            useFrame1 = true ;
-            return frame1;
-        }
 
-        if(useFrame1){
-            if((time - timestamp) > interval){
-                timestamp = time ;
-                useFrame1 = false ;
-                return frame2;
-            }else{
-                return frame1;
-            }
+        float progress=maxDragDistance+mTop*1.0f;
 
+        float percent=progress/maxDragDistance;
 
-        }else{
-
-            if((time - timestamp) > interval){
-                timestamp = time ;
-                useFrame1 = true ;
-                return frame1;
-            }else{
-                return frame2;
-            }
-
-        }
-
+        int index= (int) (TOTAL_SUM*percent);
+        Log.v("xhw","getFrame index="+index+" and  %16="+index%16+" and mPercent="+mPercent+" and percent="+percent);
+        return frame[index%16];
     }
-
-
-
 
     public static int dpToPixel(Context context, int dp) {
         float density = context.getResources().getDisplayMetrics().density;
@@ -299,23 +244,14 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
 
 
     private synchronized void startAnimation(){
-
-//        if(subscription != null && !subscription.isUnsubscribed()){
-//            return ;
-//        }
-
         if(isAnimating){
             return ;
         }
-
         isAnimating = true ;
-
         drawThread = new Thread(){
             @Override
             public void run() {
-
                 while (isAnimating){
-
                     try {
                         mParent.post(new Runnable() {
                             @Override
@@ -327,15 +263,11 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
         };
 
         drawThread.start();
-
 //        subscription = Observable.just("aaa")
 //                .doOnSubscribe(new Action0() {
 //                    @Override
