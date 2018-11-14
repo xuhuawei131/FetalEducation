@@ -27,7 +27,6 @@ import com.xuhuawei.love.fetaleducation.bean.PlayingAudioBean;
 import com.xuhuawei.love.fetaleducation.config.SingleCacheData;
 import com.xuhuawei.love.fetaleducation.files.FileSortCompare;
 import com.xuhuawei.love.fetaleducation.R;
-import com.xuhuawei.love.fetaleducation.player.MyPlayerApi;
 import com.xuhuawei.love.fetaleducation.player.MyPlayerService;
 import com.xuhuawei.love.fetaleducation.utils.FileUtils;
 
@@ -41,7 +40,7 @@ import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_ST
 import static com.xuhuawei.love.fetaleducation.config.EventBusTag.TAG_PLAY_UI_START_NEW_AUDIO;
 import static com.xuhuawei.love.fetaleducation.config.ShareConfig.SHARED_KEY_LAST_AUDIO;
 
-public class MainActivity extends BaseRefreshMoreViewActivity {
+public class LocalMainActivity extends BaseRefreshMoreViewActivity {
     private String permission[] = {WRITE_EXTERNAL_STORAGE};
     private List<MainBean> arrayList = new ArrayList<>(0);
 
@@ -275,7 +274,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity {
                 MyPlayerService.startPlayNext();
             } else if (view.getId() == R.id.layout_detail_bar) {
                 //跳转详情页面
-                Intent intent = new Intent(MainActivity.this, PlayingActivity.class);
+                Intent intent = new Intent(LocalMainActivity.this, PlayingActivity.class);
                 startActivity(intent);
             }
         }
