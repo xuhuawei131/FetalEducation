@@ -1,25 +1,23 @@
-package com.xhwbaselibrary.customview.refreshview;
+package com.xhwbaselibrary.customview.autorefresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.xhwbaselibrary.customview.autorefresh.AutoBaseRefreshView;
-import com.xhwbaselibrary.customview.autorefresh.AutoPullToRefreshView;
 import com.xhwbaselibrary.customview.autorefresh.drawable.HWRefreshDrawable5;
 
 
 /**
  * Created by xuhuawei on 16/4/14.
  */
-public class HWRefreshLayout extends AutoPullToRefreshView {
+public class AutoHWRefreshLayout extends AutoPullToRefreshView {
 
     private AutoBaseRefreshView drawable4;
 
-    public HWRefreshLayout(Context context) {
+    public AutoHWRefreshLayout(Context context) {
         this(context,null);
     }
 
-    public HWRefreshLayout(Context context, AttributeSet attrs) {
+    public AutoHWRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         drawable4 = new HWRefreshDrawable5(context, this);
         setRefreshStyle(drawable4);

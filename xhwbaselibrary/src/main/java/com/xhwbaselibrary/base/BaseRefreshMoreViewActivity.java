@@ -6,13 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
+import com.xhwbaselibrary.customview.autorefresh.AutoHWRefreshLayout;
+import com.xhwbaselibrary.customview.autorefresh.AutoPullToRefreshView;
 import com.xhwbaselibrary.customview.itemdecoration.ItemDecoration;
 import com.xhwbaselibrary.customview.moreview.EndlessRecyclerOnScrollListener;
 import com.xhwbaselibrary.customview.moreview.HeaderAndFooterRecyclerViewAdapter;
 import com.xhwbaselibrary.customview.moreview.LoadingFooter;
 import com.xhwbaselibrary.customview.moreview.RecyclerViewStateUtils;
 import com.xhwbaselibrary.customview.refreshview.HWRefreshLayout;
-import com.xhwbaselibrary.customview.refreshview.PullToRefreshView;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,7 +27,7 @@ import rx.schedulers.Schedulers;
  */
 
 public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
-    protected HWRefreshLayout refresh_layout;
+    protected AutoHWRefreshLayout refresh_layout;
     private static final int MAX_PAGE_NUM=20;
     protected abstract int getJRefreshLayoutId();
 
@@ -71,7 +72,7 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
 
     @Override
     protected final void findViewByIds() {
-        refresh_layout = (HWRefreshLayout) findViewById(getJRefreshLayoutId());
+        refresh_layout = findViewById(getJRefreshLayoutId());
         if (refresh_layout != null) {
             refresh_layout.setOnRefreshListener(onRefreshListener);
         }
@@ -111,7 +112,7 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
 
 
 
-    private PullToRefreshView.OnRefreshListener onRefreshListener=new PullToRefreshView.OnRefreshListener(){
+    private AutoPullToRefreshView.OnRefreshListener onRefreshListener=new AutoPullToRefreshView.OnRefreshListener(){
         @Override
         public void onRefresh() {
             if (refresh_layout != null && !refresh_layout.isRefreshing()) {

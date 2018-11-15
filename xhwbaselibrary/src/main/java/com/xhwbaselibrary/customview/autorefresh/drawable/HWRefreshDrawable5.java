@@ -1,4 +1,4 @@
-package com.xhwbaselibrary.customview.refreshview.drawables;
+package com.xhwbaselibrary.customview.autorefresh.drawable;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,21 +9,20 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
-import android.util.Log;
 
-import com.xhwbaselibrary.customview.refreshview.BaseRefreshView;
-import com.xhwbaselibrary.customview.refreshview.PullToRefreshView;
+import com.xhwbaselibrary.customview.autorefresh.AutoBaseRefreshView;
+import com.xhwbaselibrary.customview.autorefresh.AutoPullToRefreshView;
 
 
 /**
- * Created by RavenWang on 16/4/14.
+ * Created by xuhuawei on 18/9/2.
  */
-public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
+public class HWRefreshDrawable5 extends AutoBaseRefreshView implements Animatable {
 
     public static final String TAG = "REF";
 
     private int mTop;
-    private PullToRefreshView mParent;
+    private AutoPullToRefreshView mParent;
     private Matrix mMatrix;
 
     private Bitmap frame[]=new Bitmap[17];
@@ -80,7 +79,7 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
     private long interval = 50 ;
     private int background = Color.parseColor("#F0F0F0");
 
-    public HWRefreshDrawable5(Context context, final PullToRefreshView layout) {
+    public HWRefreshDrawable5(Context context, final AutoPullToRefreshView layout) {
         super(context, layout);
         mParent = layout ;
         mMatrix = new Matrix();
@@ -92,7 +91,7 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
 
         textSize = dpToPixel(getContext(),11);
         paint = new Paint();
-        paint.setColor(Color.GRAY);
+        paint.setColor(0xff916e4f);
         paint.setTextSize(textSize);
         paint.setAntiAlias(true);
 
@@ -131,7 +130,6 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
             int resId =getContext().getResources().getIdentifier("a"+(i+1), "drawable", getContext().getPackageName());
             Bitmap frame1 = BitmapFactory.decodeResource(getContext().getResources(), resId);
             frame[i]=frame1;
-//            frame[i]= Bitmap.createScaledBitmap(frame1, bitmapSizeWidth, bitmapSize, true);
         }
         bitmapSizeWidth= frame[frame.length-1].getWidth();
         bitmapSize= frame[frame.length-1].getHeight();
@@ -205,7 +203,7 @@ public class HWRefreshDrawable5 extends BaseRefreshView implements Animatable {
         canvas.drawColor(background);
 
         float bitmapY=maxDragDistance-arrowTextMarginBottom-height-bitmapSize;
-
+//        LogUtil.v("xhw","drawLogo height="+height+", width= "+width+",measureWidth="+paint.measureText(content));
         matrix.postTranslate(arrowImageMarginLeft, dpToPixel(getContext(),12));
         canvas.drawBitmap(getFrame(), matrix,null);
 
