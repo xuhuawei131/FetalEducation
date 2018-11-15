@@ -69,7 +69,7 @@ public class HtmlParer {
      * @return
      */
     public static List<StoryBean> dealFileListResult(Response<String> response) {
-        String url=response.raw().request().url().url().toString();
+        String url=response.getRawCall().request().url().url().toString();
         List<StoryBean> arrayList = new ArrayList<>();
 //
         String html = response.body();
