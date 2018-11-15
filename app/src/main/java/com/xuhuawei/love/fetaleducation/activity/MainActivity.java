@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.BaseRequest;
+import com.lzy.okgo.request.base.Request;
 import com.xhwbaselibrary.base.BaseRefreshMoreViewActivity;
 import com.xhwbaselibrary.interfaces.LifeCircleContext;
 import com.xuhuawei.love.fetaleducation.R;
@@ -20,11 +20,9 @@ import com.xuhuawei.love.fetaleducation.utils.HtmlPageUrlUtils;
 import com.xuhuawei.love.fetaleducation.utils.HtmlParer;
 
 import org.simple.eventbus.EventBus;
-import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
-import okhttp3.Call;
 
 public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCircleContext {
     private List<StoryBean> arrayList;

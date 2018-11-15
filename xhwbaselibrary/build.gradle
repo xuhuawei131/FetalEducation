@@ -30,6 +30,7 @@ dependencies {
     compile 'com.lzy.net:okgo:3.0.4'
     compile 'com.lzy.net:okrx:0.1.0'
     compile 'com.lzy.net:okserver:1.1.0'
+
     //eventbus
     compile 'org.simple:androideventbus:1.0.5.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
