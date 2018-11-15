@@ -75,9 +75,10 @@ public class HtmlParer {
         String html = response.body();
         Document documentAll = Jsoup.parse(html);
 
-        Elements elementId = documentAll.getElementsByClass("list-conBox-ul");
+        Elements elementId = documentAll.getElementsByClass("news-list");
+//        Elements elementId = documentAll.getElementsByClass("list-conBox-ul");
         if (elementId != null) {
-            Elements elementLiList = elementId;
+            Elements elementLiList = elementId.get(0).children();
             int length = elementLiList.size();
             for (int i = 0; i < length; i++) {
                 Element elementLi = elementLiList.get(i);
