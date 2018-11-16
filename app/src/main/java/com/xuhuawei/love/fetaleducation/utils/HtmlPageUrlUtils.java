@@ -5,12 +5,12 @@ package com.xuhuawei.love.fetaleducation.utils;
  */
 
 public class HtmlPageUrlUtils {
-    private static final String homeUrl1 = "http://www.qbaobei.com/jiaoyu/tj/tjgs/List_%d.shtml";
+    private static final String homeUrl1 = "http://www.qbaobei.com/jiaoyu/tj/tjgs/List_%d.html";
     private static final String homeUrl = "http://www.qbaobei.com/jiaoyu/tj/tjgs/";
 
     public static String getPageUrlByIndex(int pageIndex) {
         String url = "";
-        if (pageIndex == 0) {
+        if (pageIndex <2) {
             url = homeUrl;
         } else {
             url = String.format(homeUrl1, pageIndex);

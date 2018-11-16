@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.xhwbaselibrary.adapters.MyRecyclerBaseAdapter;
 import com.xhwbaselibrary.interfaces.LifeCircleContext;
+import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.adapter.viewholder.MainListViewHolder;
 import com.xuhuawei.love.fetaleducation.bean.StoryBean;
 
@@ -16,11 +17,11 @@ public class HomePageAdapter extends MyRecyclerBaseAdapter<MainListViewHolder,St
 
     @Override
     protected int getLayoutId(int viewType) {
-        return 0;
+        return R.layout.adapter_main_story;
     }
 
     @Override
     public MainListViewHolder getViewHolder(View view) {
-        return null;
+        return new MainListViewHolder(this,view);
     }
 }

@@ -51,7 +51,9 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
         }
         isDoingRequest = true;
 
-        OkGo.<String>post(HtmlPageUrlUtils.getPageUrlByIndex(0)).tag(this).execute(new ParserStringCallBack<List<StoryBean>>() {
+        OkGo.<String>get(HtmlPageUrlUtils.getPageUrlByIndex(1))
+                .headers("User-Agent","Mozilla/4.0 (compatible; MSIE 7.0; Windows 7)")
+                .tag(this).execute(new ParserStringCallBack<List<StoryBean>>() {
 
             @Override
             public void onStart(Request<String, ? extends Request> request) {
@@ -69,7 +71,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
 
             @Override
             public List<StoryBean> parserJson(Response<String> response) {
-                List<StoryBean> dataList = HtmlParer.dealFileListResult(response);
+                List<StoryBean> dataList = HtmlParer.dealArticleListResult(response);
                 return dataList;
             }
             @Override
@@ -109,7 +111,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
     protected void findRefreshMoreViewByIds() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("胎教故事");
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

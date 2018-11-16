@@ -4,11 +4,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lzy.okgo.model.Response;
+import com.xuhuawei.love.fetaleducation.bean.ArticleBean;
 import com.xuhuawei.love.fetaleducation.bean.StoryBean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
@@ -65,54 +67,127 @@ public class HtmlParer {
 
     /**
      * 解析首页的item数据
+     *
      * @param response
      * @return
      */
-    public static List<StoryBean> dealFileListResult(Response<String> response) {
-        String url=response.getRawCall().request().url().url().toString();
+    public static List<StoryBean> dealArticleListResult(Response<String> response) {
+        String url = response.getRawCall().request().url().url().toString();
         List<StoryBean> arrayList = new ArrayList<>();
 //
         String html = response.body();
         Document documentAll = Jsoup.parse(html);
-        Elements elementId1=documentAll.getElementsContainingText("list-conBox-ul");
-        Elements elementId2 = documentAll.getElementsMatchingText("news-list-main");
+        Elements elementId = documentAll.getElementsByClass("list-conBox-ul");
+//        Element masthead = documentAll.select("div.news-list-ul").first();
+        //class等于masthead的div标签
+        if (elementId != null && elementId.size() > 0) {
+            int length = elementId.size();
+            Elements elementsLi1 = elementId.get(0).children();
+            int itemSize = elementsLi1.size();
+            for (int i = 0; i < itemSize; i++) {
+                String link = "";
+                String pic = "";
+                String title = "";
+                String info = "";
+                Element elementItem = elementsLi1.get(i);
 
-        Elements elementId = documentAll.getElementsByClass("news-list");
-        if (elementId != null) {
-            Elements elementLiList = elementId.get(0).children();
-            int length = elementLiList.size();
-            for (int i = 0; i < length; i++) {
-                Element elementLi = elementLiList.get(i);
+                Elements itemList = elementItem.children();
+                int lengthElements = itemList.size();
+                if (lengthElements > 0) {
+                    Element aElement = itemList.get(0);
+                    link = aElement.attr("href");
+                    Elements imageElements = aElement.getElementsByTag("img");
+                    if (imageElements != null && imageElements.size() > 0) {
+                        Element picElement = imageElements.get(0);
+                        pic = picElement.attr("abs:src");
+                        title = picElement.attr("alt");
+                    }
+                    Element infoElement = itemList.get(1);
+                    Elements infoList = infoElement.getElementsByClass("info");
+                    if (infoList != null && infoList.size() > 0) {
+                        info = infoList.get(0).text();
+                    }
 
-                Elements elementsLi = elementLi.children();
-
-                Element elementA = elementsLi.get(0);
-                Element elementSpan = elementsLi.get(1);
-
-                StoryBean bean = new StoryBean();
-//
-                String link = elementA.attr("href");
-                String title = elementA.text();
-                String date = elementSpan.text();
-
-                if(TextUtils.isEmpty(title)||!title.contains("_")){
-                    continue;
+                    StoryBean bean = new StoryBean(link, pic, title, info);
+                    arrayList.add(bean);
                 }
-
-
-//                bean.link = link;
-//                bean.title = title;
-//
-//                bean.title = title;
-//                bean.itemId=MyUtils.getStrMD5(title);
-//                bean.link = link;
-//                bean.date = date;
-//
-                arrayList.add(bean);
             }
         } else {
-            Log.e("xhw","elementId==null"+url);
+            Log.e("xhw", "elementId==null" + url);
         }
         return arrayList;
     }
+
+
+
+    /**
+     * 解析首页的item数据
+     *
+     * @param response
+     * @return
+     */
+    public static ArticleBean dealArticleDetailResult(Response<String> response) {
+        String url = response.getRawCall().request().url().url().toString();
+        ArticleBean bean=new ArticleBean();
+        String html = response.body();
+        Document documentAll = Jsoup.parse(html);
+
+        Elements elementTop = documentAll.getElementsByClass("news-jj-main");
+        if (elementTop!=null&&elementTop.size()>0){
+            bean.top=elementTop.get(0).text();
+        }
+
+        Elements elementArticle = documentAll.getElementsByClass("detail-list item");
+        if (elementArticle!=null&&elementArticle.size()>1){
+            Element content=elementArticle.get(0);
+            Elements elementContent = content.getElementsByClass("detail-box");
+            Element contentElement=getListFirstElement(elementContent);
+            if (contentElement!=null){
+                Elements children=contentElement.children();
+                StringBuilder sb=new StringBuilder();
+                int length=children.size();
+                for (int i = 0; i < length; i++) {
+                    Element child =children.get(i);
+                    if (length-1==i){
+                        Element picElement=getListFirstElement(child.getElementsByTag("img"));
+                        String src=picElement.attr("src");
+                        bean.contentPic=src;
+                    }else{
+                        sb.append(child.text());
+                    }
+                }
+                bean.content=sb.toString();
+            }
+
+            Element edcation=elementArticle.get(1);
+            Element elementSubEducation = getListFirstElement(edcation.getElementsByClass("detail-box"));
+            if (elementSubEducation!=null){
+                Elements children=elementSubEducation.children();
+                StringBuilder sb=new StringBuilder();
+                int length=children.size();
+                for (int i = 0; i < length; i++) {
+                    Element child =children.get(i);
+                    if (length-1==i){
+                        Element picElement=getListFirstElement(child.getElementsByTag("img"));
+                        String src=picElement.attr("src");
+                        bean.educationPic=src;
+                    }else{
+                        sb.append(child.text());
+                    }
+                }
+                bean.education=sb.toString();
+            }
+        }
+
+        return bean;
+    }
+
+    public static Element getListFirstElement(Elements elements){
+        if (elements!=null&&elements.size()>0){
+            return elements.get(0);
+        }else{
+            return null;
+        }
+    }
+
 }

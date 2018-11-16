@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_article_image"
+                android:layout_width="@dimen/list_image_size"
+                android:layout_height="@dimen/list_image_size"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_article_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_article_image"
+                android:textColor="@color/comment_text"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@+id/tv_article_from"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_article_image"
+                android:layout_marginTop="3.0dip"
+                android:text="来自 知乎"
+                android:textColor="@color/comment_text" />
+        </RelativeLayout>
+
+</LinearLayout>
