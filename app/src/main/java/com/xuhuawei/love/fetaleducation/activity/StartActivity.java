@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.xhwbaselibrary.base.BasePermissActivity;
 import com.xhwbaselibrary.permission.MyPermissionTask;
@@ -31,7 +32,8 @@ public class StartActivity extends BasePermissActivity {
         checkRuntimePermission(new MyPermissionTask(PERMISSIO_ARRAY) {
             @Override
             public void onPermissionDenied(String[] var1) {
-
+                Log.v("xhw","var1"+var1.toString());
+                fetchSplashAD();
             }
 
             @Override
@@ -43,6 +45,7 @@ public class StartActivity extends BasePermissActivity {
 
     private void fetchSplashAD() {
         startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 
 

@@ -32,7 +32,9 @@ public class ArticleDetailActivity extends BaseActivity {
     private TextView text_navi_1;
     private TextView text_navi_2;
     private TextView text_story;
+    private ImageView image_content;
     private TextView text_education;
+    private ImageView image_education;
 
     private StoryBean bean;
     public static final String PARAM = "param";
@@ -55,6 +57,8 @@ public class ArticleDetailActivity extends BaseActivity {
         text_navi_2 = findViewById(R.id.text_navi_2);
 
         text_story = findViewById(R.id.text_story);
+        image_content = findViewById(R.id.image_content);
+        image_education = findViewById(R.id.image_education);
         text_education = findViewById(R.id.text_education);
 
 
@@ -66,6 +70,8 @@ public class ArticleDetailActivity extends BaseActivity {
         collapsingToolbar =
                 findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(bean.title);
+
+
         text_navi_1.setText(bean.title);
         text_navi_2.setText(bean.title+"故事点评");
     }
@@ -102,6 +108,24 @@ public class ArticleDetailActivity extends BaseActivity {
             @Override
             public void onResultComing(ArticleBean response) {
                 disProgressDialog();
+                text_top.setText(response.top);
+
+                text_story.setText(response.content);
+                text_education.setText(response.education);
+
+                Glide.with(getContext())
+                        .load(response.contentPic)
+                        .placeholder(R.drawable.abc_popup_background_mtrl_mult)
+                        .error(R.drawable.abc_popup_background_mtrl_mult)
+                        .into(image_content);
+
+
+                Glide.with(getContext())
+                        .load(response.educationPic)
+                        .placeholder(R.drawable.abc_popup_background_mtrl_mult)
+                        .error(R.drawable.abc_popup_background_mtrl_mult)
+                        .into(image_education);
+
             }
         });
 

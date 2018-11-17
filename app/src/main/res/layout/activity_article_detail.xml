@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tool="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -15,6 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/append_article_title"
+            app:collapsedTitleTextAppearance="@style/cool_article_title"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -34,7 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -47,14 +51,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_top"
-                android:textColor="#999"
-                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="6dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#999"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,9 +70,11 @@
                 android:layout_marginTop="15dp"
                 android:gravity="bottom"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/text_navi"
                     android:text="1" />
+
                 <TextView
                     android:id="@+id/text_navi_1"
                     style="@style/text_article_navi"
@@ -74,6 +84,12 @@
             <TextView
                 android:id="@+id/text_story"
                 style="@style/text_article_content" />
+
+            <ImageView
+                android:id="@+id/image_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,8 +110,13 @@
 
             <TextView
                 android:id="@+id/text_education"
+                style="@style/text_article_content" />
+
+            <ImageView
+                android:id="@+id/image_education"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
