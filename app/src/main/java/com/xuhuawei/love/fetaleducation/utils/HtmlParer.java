@@ -167,11 +167,11 @@ public class HtmlParer {
                 int length=children.size();
                 for (int i = 0; i < length; i++) {
                     Element child =children.get(i);
-                    if (length-1==i){
-                        Element picElement=getListFirstElement(child.getElementsByTag("img"));
+                    Element picElement=getListFirstElement(child.getElementsByTag("img"));
+                    if (picElement!=null){
                         String src=picElement.attr("src");
                         bean.educationPic=src;
-                    }else{
+                    } else{
                         sb.append(child.text());
                     }
                 }
@@ -179,6 +179,7 @@ public class HtmlParer {
             }
         }
 
+        Log.v("xhw","bean "+bean.toString());
         return bean;
     }
 

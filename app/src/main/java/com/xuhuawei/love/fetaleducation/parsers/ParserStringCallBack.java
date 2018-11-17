@@ -1,5 +1,7 @@
 package com.xuhuawei.love.fetaleducation.parsers;
 
+import android.util.Log;
+
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
@@ -61,6 +63,12 @@ public abstract class ParserStringCallBack<ResultType> extends StringCallback {
                         }
                     })
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError(new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            Log.v("xhw","error->"+throwable.getMessage());
+                        }
+                    })
                     .subscribe(new Action1<ResultType>() {
                         @Override
                         public void call(ResultType resultType) {
