@@ -104,8 +104,8 @@ public class LocalMainActivity extends BaseRefreshMoreViewActivity {
         NavigationView navigationView = findMyViewById(R.id.nav_view);
         View headerLayout = navigationView.inflateHeaderView(R.layout.layout_navi_left);
 
-        View text_downloading = headerLayout.findViewById(R.id.text_downloading);
-        View text_downloaded = headerLayout.findViewById(R.id.text_downloaded);
+//        View text_downloading = headerLayout.findViewById(R.id.text_downloading);
+//        View text_downloaded = headerLayout.findViewById(R.id.text_downloaded);
         View text_setting = headerLayout.findViewById(R.id.text_setting);
         View text_exit = headerLayout.findViewById(R.id.text_exit);
 

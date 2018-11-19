@@ -110,6 +110,8 @@ public class ArticleDetailActivity extends BaseActivity {
                 disProgressDialog();
                 text_top.setText(response.top);
 
+                text_navi_1.setText(response.contentTop);
+                text_navi_2.setText(response.educationTop);
                 text_story.setText(response.content);
                 text_education.setText(response.education);
 

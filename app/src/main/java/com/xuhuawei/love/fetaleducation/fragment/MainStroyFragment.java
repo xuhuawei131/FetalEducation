@@ -1,7 +1,7 @@
 package com.xuhuawei.love.fetaleducation.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.lzy.okgo.OkGo;
@@ -9,6 +9,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.xhwbaselibrary.base.BaseRefreshMoreViewActivity;
 import com.xhwbaselibrary.base.fragment.BaseRefreshMoreViewFragment;
+import com.xhwbaselibrary.customview.itemdecoration.ItemDecoration;
 import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.adapter.HomePageAdapter;
 import com.xuhuawei.love.fetaleducation.bean.StoryBean;
@@ -26,7 +27,7 @@ public class MainStroyFragment extends BaseRefreshMoreViewFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
+        arrayList = new ArrayList<>();
     }
 
     @Override
@@ -46,7 +47,9 @@ public class MainStroyFragment extends BaseRefreshMoreViewFragment {
 
     @Override
     protected void findRefreshMoreViewByIds() {
-        arrayList = new ArrayList<>();
+        ItemDecoration decoration = new ItemDecoration(getContext(), LinearLayoutManager.VERTICAL,0);
+        mListView.addItemDecoration(decoration);
+
         HomePageAdapter adapter = new HomePageAdapter(this, arrayList);
         setAdapter(adapter);
     }

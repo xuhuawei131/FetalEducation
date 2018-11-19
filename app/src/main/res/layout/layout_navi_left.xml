@@ -10,18 +10,18 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:id="@+id/text_downloading"
+        android:id="@+id/text_story"
         style="@style/navi_left_layout"
         android:drawableLeft="@drawable/ic_menu_gallery"
-        android:text="正下载(0)" />
+        android:text="胎教故事" />
 
     <View style="@style/navi_left_line" />
 
     <TextView
-        android:id="@+id/text_downloaded"
+        android:id="@+id/text_ask"
         style="@style/navi_left_layout"
         android:drawableLeft="@drawable/ic_menu_slideshow"
-        android:text="已下载(0)" />
+        android:text="胎教文章" />
 
     <View style="@style/navi_left_line" />
 
