@@ -33,13 +33,19 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
          */
         private Paint mPaint ;
 
-        /**
+    public ItemDecoration(Context context, int orientation) {
+        this(context,orientation,1);
+
+    }
+
+    /**
          * 构造方法传入布局方向，不可不传
          * @param context
          * @param orientation
          */
-    public ItemDecoration(Context context, int orientation) {
+    public ItemDecoration(Context context, int orientation,int mItemSize) {
             this.mOrientation = orientation;
+            this.mItemSize=mItemSize;
             if(orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL){
                 throw new IllegalArgumentException("请传入正确的参数") ;
             }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xhwbaselibrary.adapters.viewholders.BaseViewHolder;
 import com.xhwbaselibrary.image.CornerTransform;
+import com.xhwbaselibrary.image.RoundedCornersTransformation;
 import com.xhwbaselibrary.interfaces.AdapterBehavior;
 import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.activity.ArticleDetailActivity;
@@ -19,7 +20,7 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
     private ImageView iv_article_image;
     private TextView tv_article_title;
     private TextView tv_article_from;
-    private CornerTransform transformation=null;
+    private RoundedCornersTransformation transformation=null;
     public MainListViewHolder(AdapterBehavior behavior, View itemView) {
         super(behavior, itemView);
     }
@@ -29,12 +30,13 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
         iv_article_image = findViewById(R.id.iv_article_image);
         tv_article_title = findViewById(R.id.tv_article_title);
         tv_article_from = findViewById(R.id.tv_article_from);
-        transformation= new CornerTransform(getContext(), 10);
-        transformation.setExceptCorner(true,true,false,false);
-    }
+         }
 
     @Override
     protected void onBindView(int position, StoryBean bean) {
+        transformation= new RoundedCornersTransformation(getContext(), 10,0, RoundedCornersTransformation.CornerType.BOTTOM);
+
+
         tv_article_title.setText(bean.title);
         tv_article_from.setText(bean.info);
 
@@ -43,9 +45,9 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
                 .load(bean.pic)
                 .asBitmap()
                 .skipMemoryCache(true)
+                .transform(transformation)
                 .placeholder(R.drawable.abc_popup_background_mtrl_mult)
                 .error(R.drawable.abc_popup_background_mtrl_mult)
-                .transform(transformation)
                 .into(iv_article_image);
 
     }

@@ -81,8 +81,8 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
         mListView.setLayoutManager(new LinearLayoutManager(this));
         mListView.setBackgroundColor(Color.WHITE);
         mListView.addOnScrollListener(scrollListener);
-        ItemDecoration decoration = new ItemDecoration(this, LinearLayoutManager.VERTICAL);
-        mListView.addItemDecoration(decoration);
+//        ItemDecoration decoration = new ItemDecoration(this, LinearLayoutManager.VERTICAL);
+//        mListView.addItemDecoration(decoration);
 
         findRefreshMoreViewByIds();
     }
@@ -154,7 +154,8 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
                 return;
             }
             if (hasMore) {
-                showLoadingFootView(getMaxNumByPage());
+//                showLoadingFootView(getMaxNumByPage());
+                showNormalFootView();
                 onMoreTask();
             } else {
                 //没有更多数据

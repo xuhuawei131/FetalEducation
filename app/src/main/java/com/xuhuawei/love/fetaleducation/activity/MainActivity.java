@@ -4,6 +4,7 @@ package com.xuhuawei.love.fetaleducation.activity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -11,6 +12,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.xhwbaselibrary.base.BaseRefreshMoreViewActivity;
+import com.xhwbaselibrary.customview.itemdecoration.ItemDecoration;
 import com.xhwbaselibrary.interfaces.LifeCircleContext;
 import com.xuhuawei.love.fetaleducation.R;
 import com.xuhuawei.love.fetaleducation.adapter.HomePageAdapter;
@@ -32,7 +34,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
-    private boolean  isFirstRequest=true;
+
     @Override
     protected void init() {
 
@@ -46,51 +48,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
     @Override
     protected void requestService() {
         EventBus.getDefault().register(this);
-        if (isDoingRequest) {
-            return;
-        }
-        isDoingRequest = true;
-
-        OkGo.<String>get(HtmlPageUrlUtils.getPageUrlByIndex(1))
-                .headers("User-Agent","Mozilla/4.0 (compatible; MSIE 7.0; Windows 7)")
-                .tag(this).execute(new ParserStringCallBack<List<StoryBean>>() {
-
-            @Override
-            public void onStart(Request<String, ? extends Request> request) {
-                super.onStart(request);
-                showProgressDialog();
-            }
-
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                notifyEmptyAdapter();
-                disProgressDialog();
-            }
-
-
-            @Override
-            public List<StoryBean> parserJson(Response<String> response) {
-                List<StoryBean> dataList = HtmlParer.dealArticleListResult(response);
-                return dataList;
-            }
-            @Override
-            public void onResultComing(List<StoryBean> response) {
-                disProgressDialog();
-                isDoingRequest = false;
-
-                arrayList.clear();
-                arrayList.addAll(response);
-
-                notifyDataSetChanged();
-                notifyEmptyAdapter();
-                setRefreshFinish();
-                if(isFirstRequest){
-                    isFirstRequest=false;
-//                    showWaittingDialog();
-                }
-            }
-        });
+        requestNetData(1);
     }
 
     @Override
@@ -118,6 +76,8 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        ItemDecoration decoration = new ItemDecoration(this, LinearLayoutManager.VERTICAL,0);
+        mListView.addItemDecoration(decoration);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout = navigationView.inflateHeaderView(R.layout.layout_navi_left);
@@ -143,7 +103,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
     }
     @Override
     protected Object doRefreshTask() {
-        requestService();
+        requestNetData(0);
         return null;
     }
     @Override
@@ -151,6 +111,55 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
 
     @Override
     protected void onMoreTask() {
+        requestNetData(currentIndex+1);
+    }
+
+
+    private void requestNetData(final int index){
+        if (isDoingRequest) {
+            return;
+        }
+        isDoingRequest = true;
+
+        OkGo.<String>get(HtmlPageUrlUtils.getPageUrlByIndex(index))
+                .headers("User-Agent","Mozilla/4.0 (compatible; MSIE 7.0; Windows 7)")
+                .tag(this).execute(new ParserStringCallBack<List<StoryBean>>() {
+
+            @Override
+            public void onStart(Request<String, ? extends Request> request) {
+                super.onStart(request);
+                showProgressDialog();
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                notifyEmptyAdapter();
+                disProgressDialog();
+            }
+
+
+            @Override
+            public List<StoryBean> parserJson(Response<String> response) {
+                List<StoryBean> dataList = HtmlParer.dealArticleListResult(response);
+                return dataList;
+            }
+            @Override
+            public void onResultComing(List<StoryBean> response) {
+                disProgressDialog();
+                currentIndex=index;
+                isDoingRequest = false;
+                if (index==1){
+                    setRefreshFinish();
+                    arrayList.clear();
+                }
+                arrayList.addAll(response);
+
+                notifyDataSetChanged();
+                notifyEmptyAdapter();
+            }
+        });
+
 
     }
 
