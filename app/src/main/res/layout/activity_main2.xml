@@ -10,9 +10,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#30469b">
+        android:background="@color/colorAccent">
 
         <TextView
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -33,31 +34,8 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:orientation="vertical" />
 
-                <com.xhwbaselibrary.customview.autorefresh.AutoHWRefreshLayout
-                    android:id="@+id/refreshLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </com.xhwbaselibrary.customview.autorefresh.AutoHWRefreshLayout>
-
-                <TextView
-                    android:id="@+id/textEmptyView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="数据为空！"
-                    android:visibility="gone" />
-            </FrameLayout>
-        </LinearLayout>
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="240dp"
@@ -65,8 +43,7 @@
             android:layout_gravity="start"
             android:background="#ffffff"
             app:itemIconTint="@color/colorPrimary"
-            app:itemTextColor="@color/colorPrimary"
-            />
+            app:itemTextColor="@color/colorPrimary" />
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
 
