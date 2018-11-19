@@ -12,6 +12,7 @@
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_blue">#ff448aff</color>
+    <color name="half_white">#88ffffff</color>
     <color name="accent_blue_grey">#ff607d8b</color>
     <color name="accent_brown">#ff795548</color>
     <color name="accent_deep_purple">#ff7c4dff</color>

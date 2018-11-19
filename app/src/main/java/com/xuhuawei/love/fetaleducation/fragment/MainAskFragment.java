@@ -14,6 +14,7 @@ import com.xhwbaselibrary.base.fragment.BaseRefreshMoreViewFragment;
 import com.xhwbaselibrary.customview.itemdecoration.ItemDecoration;
 import com.xhwbaselibrary.utils.UIUtils;
 import com.xuhuawei.love.fetaleducation.R;
+import com.xuhuawei.love.fetaleducation.adapter.AskQuestionAdapter;
 import com.xuhuawei.love.fetaleducation.adapter.HomePageAdapter;
 import com.xuhuawei.love.fetaleducation.bean.StoryBean;
 import com.xuhuawei.love.fetaleducation.dividers.GridDividerItem;
@@ -57,7 +58,7 @@ public class MainAskFragment extends BaseRefreshMoreViewFragment {
         GridDividerItem decoration = new GridDividerItem(UIUtils.dip2px(5), UIUtils.dip2px(5));
         mListView.addItemDecoration(decoration);
 
-        HomePageAdapter adapter = new HomePageAdapter(this, arrayList);
+        AskQuestionAdapter adapter = new AskQuestionAdapter(this, arrayList);
         setAdapter(adapter);
     }
     @Override

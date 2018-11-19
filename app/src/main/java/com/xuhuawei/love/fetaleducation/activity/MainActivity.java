@@ -73,8 +73,10 @@ public class MainActivity extends BaseActivity implements LifeCircleContext {
         public void onClick(View v) {
             drawer.closeDrawers();
             if (v.getId()==R.id.text_story){
+                text_title.setText("胎教故事");
                 jum2Fragment(fragment1);
             }else if (v.getId()==R.id.text_ask){
+                text_title.setText("胎教文章");
                 jum2Fragment(fragment2);
             }
         }
