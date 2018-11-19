@@ -2,9 +2,11 @@ package com.xhwbaselibrary.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import com.roger.catloadinglibrary.CatLoadingView;
@@ -44,6 +46,11 @@ public abstract class BaseActivity extends BasePermissActivity implements LifeCi
     private CatLoadingView mView;
     private List<Toast> arrayList;
     private Subscription initObservable;
+
+
+    public < T extends View> T findMyViewById(@IdRes int id) {
+        return (T) findViewById(id);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

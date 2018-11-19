@@ -69,6 +69,7 @@ public class MainActivity extends BaseRefreshMoreViewActivity implements LifeCir
     protected void findRefreshMoreViewByIds() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("");
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

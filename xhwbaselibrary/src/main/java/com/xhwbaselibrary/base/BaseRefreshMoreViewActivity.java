@@ -72,7 +72,7 @@ public abstract class BaseRefreshMoreViewActivity extends BaseActivity   {
 
     @Override
     protected final void findViewByIds() {
-        refresh_layout = findViewById(getJRefreshLayoutId());
+        refresh_layout = (AutoHWRefreshLayout) findViewById(getJRefreshLayoutId());
         if (refresh_layout != null) {
             refresh_layout.setOnRefreshListener(onRefreshListener);
         }

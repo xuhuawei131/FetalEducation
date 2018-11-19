@@ -75,28 +75,28 @@ public class PlayingActivity extends BaseActivity {
 
     @Override
     protected void findViewByIds() {
-        ivLast = findViewById(R.id.ivLast);
-        ivPlayOrPause = findViewById(R.id.ivPlayOrPause);
-        ivNext = findViewById(R.id.ivNext);
+        ivLast = findMyViewById(R.id.ivLast);
+        ivPlayOrPause = findMyViewById(R.id.ivPlayOrPause);
+        ivNext = findMyViewById(R.id.ivNext);
 
         ivLast.setOnClickListener(onClickListener);
         ivPlayOrPause.setOnClickListener(onClickListener);
         ivNext.setOnClickListener(onClickListener);
 
-        mSeekBar = findViewById(R.id.musicSeekBar);
-        text_title = findViewById(R.id.text_title);
-        text_timer = findViewById(R.id.text_timer);
-        text_currentTime = findViewById(R.id.text_currentTime);
-        text_totalTime = findViewById(R.id.text_totalTime);
+        mSeekBar = findMyViewById(R.id.musicSeekBar);
+        text_title = findMyViewById(R.id.text_title);
+        text_timer = findMyViewById(R.id.text_timer);
+        text_currentTime = findMyViewById(R.id.text_currentTime);
+        text_totalTime = findMyViewById(R.id.text_totalTime);
 
-        View btn_back = findViewById(R.id.btn_back);
+        View btn_back = findMyViewById(R.id.btn_back);
         btn_back.setOnClickListener(onClickListener);
 
-        View btn_share = findViewById(R.id.btn_share);
+        View btn_share = findMyViewById(R.id.btn_share);
         btn_share.setOnClickListener(onClickListener);
 
-        btn_list = findViewById(R.id.btn_list);
-        btn_menu = findViewById(R.id.btn_menu);
+        btn_list = findMyViewById(R.id.btn_list);
+        btn_menu = findMyViewById(R.id.btn_menu);
         btn_list.setOnClickListener(onClickListener);
         btn_menu.setOnClickListener(onClickListener);
 

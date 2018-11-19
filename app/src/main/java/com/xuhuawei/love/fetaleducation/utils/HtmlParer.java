@@ -152,7 +152,7 @@ public class HtmlParer {
                         Element picElement=getListFirstElement(child.getElementsByTag("img"));
                         String src=picElement.attr("src");
                         bean.contentPic=src;
-                    }else{
+                    }else if (i!=0){
                         sb.append(child.text());
                     }
                 }
@@ -171,7 +171,7 @@ public class HtmlParer {
                     if (picElement!=null){
                         String src=picElement.attr("src");
                         bean.educationPic=src;
-                    } else{
+                    } else if (i!=0){
                         sb.append(child.text());
                     }
                 }

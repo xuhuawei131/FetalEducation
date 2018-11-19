@@ -51,24 +51,24 @@ public class ArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void findViewByIds() {
-        image_bg = findViewById(R.id.image_bg);
-        text_top = findViewById(R.id.text_top);
-        text_navi_1 = findViewById(R.id.text_navi_1);
-        text_navi_2 = findViewById(R.id.text_navi_2);
+        image_bg = (ImageView) findViewById(R.id.image_bg);
+        text_top = (TextView) findViewById(R.id.text_top);
+        text_navi_1 = (TextView) findViewById(R.id.text_navi_1);
+        text_navi_2 = (TextView) findViewById(R.id.text_navi_2);
 
-        text_story = findViewById(R.id.text_story);
-        image_content = findViewById(R.id.image_content);
-        image_education = findViewById(R.id.image_education);
-        text_education = findViewById(R.id.text_education);
+        text_story = (TextView) findViewById(R.id.text_story);
+        image_content = (ImageView) findViewById(R.id.image_content);
+        image_education = (ImageView) findViewById(R.id.image_education);
+        text_education = (TextView) findViewById(R.id.text_education);
 
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar =
-                findViewById(R.id.collapsing_toolbar);
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(bean.title);
 
 

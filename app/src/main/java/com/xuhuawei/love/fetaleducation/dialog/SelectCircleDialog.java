@@ -64,28 +64,28 @@ public class SelectCircleDialog extends Dialog {
                 R.layout.layout_circle_item, null);
         root.findViewById(R.id.btn_close).setOnClickListener(btnlistener);
         layout_none=  root.findViewById(R.id.layout_none);
-        image_none_select=  root.findViewById(R.id.image_none_select);
+        image_none_select= (ImageView) root.findViewById(R.id.image_none_select);
         layout_none.setOnClickListener(btnlistener);
         imageViews[0]=image_none_select;
 
         layout_single=  root.findViewById(R.id.layout_single);
-        image_single_select=  root.findViewById(R.id.image_single_select);
+        image_single_select= (ImageView) root.findViewById(R.id.image_single_select);
         layout_single.setOnClickListener(btnlistener);
         imageViews[1]=image_single_select;
 
         layout_list=  root.findViewById(R.id.layout_list);
-        image_list_select=  root.findViewById(R.id.image_list_select);
+        image_list_select= (ImageView) root.findViewById(R.id.image_list_select);
         layout_list.setOnClickListener(btnlistener);
         imageViews[2]=image_list_select;
 
         layout_none_list=  root.findViewById(R.id.layout_list_none);
-        image_list_none_select=  root.findViewById(R.id.image_list_none_select);
+        image_list_none_select= (ImageView) root.findViewById(R.id.image_list_none_select);
         layout_none_list.setOnClickListener(btnlistener);
         imageViews[3]=image_list_none_select;
 
 
         layout_random=  root.findViewById(R.id.layout_random);
-        image_random_select=  root.findViewById(R.id.image_random_select);
+        image_random_select= (ImageView) root.findViewById(R.id.image_random_select);
         layout_random.setOnClickListener(btnlistener);
         imageViews[4]=image_random_select;
 

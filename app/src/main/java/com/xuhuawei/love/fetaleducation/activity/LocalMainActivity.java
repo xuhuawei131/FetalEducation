@@ -87,21 +87,21 @@ public class LocalMainActivity extends BaseRefreshMoreViewActivity {
 //        upArrow.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
 //        getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-        layout_detail_bar = findViewById(R.id.layout_detail_bar);
-        text_bar_name = findViewById(R.id.text_bar_name);
-        ivPlayOrPause = findViewById(R.id.ivPlayOrPause);
-        ivNext = findViewById(R.id.ivNext);
+        layout_detail_bar = findMyViewById(R.id.layout_detail_bar);
+        text_bar_name = findMyViewById(R.id.text_bar_name);
+        ivPlayOrPause = findMyViewById(R.id.ivPlayOrPause);
+        ivNext = findMyViewById(R.id.ivNext);
 
         ivPlayOrPause.setOnClickListener(listener);
         ivNext.setOnClickListener(listener);
         layout_detail_bar.setOnClickListener(listener);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findMyViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findMyViewById(R.id.nav_view);
         View headerLayout = navigationView.inflateHeaderView(R.layout.layout_navi_left);
 
         View text_downloading = headerLayout.findViewById(R.id.text_downloading);

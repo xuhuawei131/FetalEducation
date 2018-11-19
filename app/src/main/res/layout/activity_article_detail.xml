@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -85,7 +86,9 @@
                 android:id="@+id/text_story"
                 style="@style/text_article_content" />
 
-            <ImageView
+            <com.xhwbaselibrary.customview.ratio.RatioImageView
+                app:width_ratio="20"
+                app:height_ratio="15"
                 android:id="@+id/image_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +115,9 @@
                 android:id="@+id/text_education"
                 style="@style/text_article_content" />
 
-            <ImageView
+            <com.xhwbaselibrary.customview.ratio.RatioImageView
+                app:width_ratio="20"
+                app:height_ratio="15"
                 android:id="@+id/image_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
