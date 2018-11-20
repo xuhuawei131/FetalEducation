@@ -47,7 +47,7 @@ public class MainStroyFragment extends BaseRefreshMoreViewFragment {
 
     @Override
     protected void findRefreshMoreViewByIds() {
-        ItemDecoration decoration = new ItemDecoration(getContext(), LinearLayoutManager.VERTICAL,0);
+        ItemDecoration decoration = new ItemDecoration(getContext(), LinearLayoutManager.VERTICAL,1);
         mListView.addItemDecoration(decoration);
 
         HomePageAdapter adapter = new HomePageAdapter(this, arrayList);

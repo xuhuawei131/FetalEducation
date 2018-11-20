@@ -8,8 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xhwbaselibrary.base.BaseActivity;
 import com.xhwbaselibrary.interfaces.LifeCircleContext;
@@ -23,6 +25,8 @@ public class MainActivity extends BaseActivity implements LifeCircleContext {
     private ActionBarDrawerToggle toggle;
     private  MainStroyFragment fragment1 = new MainStroyFragment();
     private  MainAskFragment fragment2 = new MainAskFragment();
+
+    private long lastTime=0;
     @Override
     protected void init() {
 
@@ -87,5 +91,20 @@ public class MainActivity extends BaseActivity implements LifeCircleContext {
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(Gravity.LEFT)){
+            drawer.closeDrawers();
+        }else{
+            long currentTime=System.currentTimeMillis();
+            if (currentTime-lastTime>2000){
+                Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+                lastTime=currentTime;
+            }else{
+                super.onBackPressed();
+            }
+        }
     }
 }

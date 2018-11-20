@@ -20,7 +20,6 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
     private ImageView iv_article_image;
     private TextView tv_article_title;
     private TextView tv_article_from;
-    private RoundedCornersTransformation transformation=null;
     public MainListViewHolder(AdapterBehavior behavior, View itemView) {
         super(behavior, itemView);
     }
@@ -34,7 +33,6 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
 
     @Override
     protected void onBindView(int position, StoryBean bean) {
-        transformation= new RoundedCornersTransformation(getContext(), 10,0, RoundedCornersTransformation.CornerType.BOTTOM);
 
 
         tv_article_title.setText(bean.title);
@@ -43,11 +41,8 @@ public class MainListViewHolder extends BaseViewHolder<StoryBean> {
         itemView.setOnClickListener(onClickListener);
         Glide.with(getContext())
                 .load(bean.pic)
-                .asBitmap()
-                .skipMemoryCache(true)
-                .transform(transformation)
-                .placeholder(R.drawable.abc_popup_background_mtrl_mult)
-                .error(R.drawable.abc_popup_background_mtrl_mult)
+                .placeholder(R.drawable.ic_launcher)
+                .error(R.drawable.ic_launcher)
                 .into(iv_article_image);
 
     }
