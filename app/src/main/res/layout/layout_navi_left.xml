@@ -25,13 +25,13 @@
 
     <View style="@style/navi_left_line" />
 
-    <TextView
-        android:id="@+id/text_setting"
-        style="@style/navi_left_layout"
-        android:drawableLeft="@drawable/ic_menu_manage"
-        android:text="设置" />
+    <!--<TextView-->
+        <!--android:id="@+id/text_setting"-->
+        <!--style="@style/navi_left_layout"-->
+        <!--android:drawableLeft="@drawable/ic_menu_manage"-->
+        <!--android:text="设置" />-->
 
-    <View style="@style/navi_left_line" />
+    <!--<View style="@style/navi_left_line" />-->
 
     <TextView
         android:id="@+id/text_exit"

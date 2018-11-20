@@ -54,12 +54,12 @@ public class MainActivity extends BaseActivity implements LifeCircleContext {
 
         View text_story=headerLayout.findViewById(R.id.text_story);
         View text_ask=headerLayout.findViewById(R.id.text_ask);
-        View text_setting=headerLayout.findViewById(R.id.text_setting);
+//        View text_setting=headerLayout.findViewById(R.id.text_setting);
         View text_exit=headerLayout.findViewById(R.id.text_exit);
 
         text_story.setOnClickListener(clickListener);
         text_ask.setOnClickListener(clickListener);
-        text_setting.setOnClickListener(clickListener);
+//        text_setting.setOnClickListener(clickListener);
         text_exit.setOnClickListener(clickListener);
     }
 
@@ -82,6 +82,8 @@ public class MainActivity extends BaseActivity implements LifeCircleContext {
             }else if (v.getId()==R.id.text_ask){
                 text_title.setText("胎教文章");
                 jum2Fragment(fragment2);
+            }else if (v.getId()==R.id.text_exit){
+                finish();
             }
         }
     };
